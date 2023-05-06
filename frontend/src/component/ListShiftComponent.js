@@ -1,4 +1,4 @@
-
+//vincentdelara
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import Shiftservice from '../service/Shiftservice';
@@ -53,7 +53,8 @@ const ListShiftComponent = () => {
               <td>{data.shifttype}</td>
               <td>{data.status}</td>
               <td>
-                <div className='updel'><Link to={`/add-shift/${data.id}`} className='btn btn-info' href="">Update</Link> {" "}
+                <div className='updel'><Link to={`/request/${data.id}`} className='btn btn-info' href="">Request</Link>
+                  <Link to={`/add-shift/${data.id}`} className='btn btn-info' href="">Update</Link> 
                   <a onClick={(e) => deleteData(e, data.id)} className='btn btn-danger'>Delete</a></div>
               </td>
             </tr>)}

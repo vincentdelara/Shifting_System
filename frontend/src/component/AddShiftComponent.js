@@ -1,3 +1,4 @@
+//vincentdelara
 import React, { useState, useEffect } from 'react';
 import Shiftservice from "../service/Shiftservice";
 import { Link, useNavigate, useParams } from 'react-router-dom';
@@ -21,14 +22,6 @@ const AddShiftComponent = () => {
 
     const shiftData = { overtime, otime, start, end, xpire, shifttype, status };
 
-    const handleDateChange = (date) => {
-        setovertime(date);
-    };
-
-    const handleDateChange2 = (date) => {
-        setotime(date);
-    };
-
     const Line = () => {
         return <div className="line"></div>;
     };
@@ -43,8 +36,15 @@ const AddShiftComponent = () => {
             shiftData.end !== "" &&
             shiftData.xpire !== ""
         ) {
+            const start = new Date(shiftData.start);
+            const end = new Date(shiftData.end);
 
-            const shiftDuration = (new Date(shiftData.end) - new Date(shiftData.start)) / (1000 * 60 * 60);
+            // Add 24 hours to end time if it's before start time
+            if (end.getTime() < start.getTime()) {
+                end.setDate(end.getDate() + 1);
+            }
+
+            const shiftDuration = (end - start) / (1000 * 60 * 60);
 
             // Set shifttype based on shift duration
             if (shiftDuration < 4) {
@@ -56,15 +56,14 @@ const AddShiftComponent = () => {
                 shiftData.shifttype = "8 Hour Shifting";
             }
 
-
             // Format start and end times
-            const formattedStart = new Date(shiftData.start).toLocaleTimeString("en-US", {
+            const formattedStart = start.toLocaleTimeString("en-US", {
                 hour12: false,
                 hour: "2-digit",
                 minute: "2-digit",
                 second: "2-digit",
             });
-            const formattedEnd = new Date(shiftData.end).toLocaleTimeString("en-US", {
+            const formattedEnd = end.toLocaleTimeString("en-US", {
                 hour12: false,
                 hour: "2-digit",
                 minute: "2-digit",
@@ -89,8 +88,6 @@ const AddShiftComponent = () => {
         }
     }
 
-    const shiftDuration = (new Date(shiftData.end) - new Date(shiftData.start)) / (1000 * 60 * 60);
-    const isDisabled = shiftDuration < 4;
 
     function tile() {
         if (id) {
@@ -102,24 +99,22 @@ const AddShiftComponent = () => {
 
     useEffect(() => {
         if (id) {
-            Shiftservice.getDataById(id)
-                .then(res => {
-                    setovertime(new Date(res.data.overtime));
-                    setotime(new Date(res.data.otime));
-                    setstart(res.data.start);
-                    setend(res.data.end);
-                    setxpire(res.data.xpire);
-                    setshifttype(res.data.shifttype);
-                    setstatus(res.data.status);
-                })
-                .catch(e => console.log(e));
+          Shiftservice.getDataById(id)
+            .then(res => {
+              setovertime(new Date(res.data.overtime));
+              setotime(new Date(res.data.otime));
+              setxpire(res.data.xpire);
+              setshifttype(res.data.shifttype);
+              setstatus(res.data.status);
+            })
+            .catch(e => console.log(e));
         } else {
-            if (overtime && otime) {
-                const lastDayOfYear = new Date(overtime.getFullYear(), 11, 31);
-                setxpire(lastDayOfYear.toLocaleDateString('en-CA').split('/').reverse().join('-'));
-            }
+          if (overtime && otime) {
+            const lastDayOfYear = new Date(overtime.getFullYear(), 11, 31);
+            setxpire(lastDayOfYear.toLocaleDateString('en-CA').split('/').reverse().join('-'));
+          }
         }
-    }, []);
+      }, [id, overtime, otime]);
 
     return (
         <div>
@@ -134,7 +129,7 @@ const AddShiftComponent = () => {
                                     Start Date
                                     <DatePicker
                                         selected={overtime}
-                                        onChange={handleDateChange}
+                                        onChange={setovertime}
                                         dateFormat="MMMM d, yyyy"
                                         maxDate={new Date()}
                                         className="form-control"
@@ -144,7 +139,7 @@ const AddShiftComponent = () => {
                                     End Date
                                     <DatePicker
                                         selected={otime}
-                                        onChange={handleDateChange2}
+                                        onChange={setotime}
                                         dateFormat="MMMM d, yyyy"
                                         maxDate={new Date()}
                                         className="form-control"
@@ -159,6 +154,7 @@ const AddShiftComponent = () => {
                                         format="h:mm A"
                                         use12Hours
                                         className="form-control"
+                                        placeholder={start}
                                     />
                                 </div>
                                 <div>
@@ -173,7 +169,7 @@ const AddShiftComponent = () => {
                                     />
                                 </div>
 
-                                <button className='btn btn-success' onClick={saveData} disabled={isDisabled} >Save</button>
+                                <button className='btn btn-success' onClick={saveData}>Save</button>
                                 <Link to='/shifts' className='btn btn-danger ml-2'>Cancel</Link>
                             </form>
                         </div>
@@ -184,4 +180,3 @@ const AddShiftComponent = () => {
     );
 }
 export default AddShiftComponent
-

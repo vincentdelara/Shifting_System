@@ -1,3 +1,4 @@
+/* vincentdelara */
 .btn.btn-primary.mb-2.mt-3 {
     --bs-btn-color: #fff;
     --bs-btn-bg: #008B00;
@@ -37,6 +38,7 @@
         --bs-btn-disabled-bg: #063f06;
         --bs-btn-disabled-border-color: #063f06;
         border-radius: 100px;
+        margin-left: 5px;
 }
 
 .btn.btn-danger{
@@ -118,3 +120,13 @@ img, svg {
     margin-bottom: 20px;
 }
 
+.bold{
+    font-weight: bold;
+    padding-right: 20px;
+    text-align: right;
+}
+
+
+  
+
+  

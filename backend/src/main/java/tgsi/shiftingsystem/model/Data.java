@@ -1,3 +1,4 @@
+//vincentdelara
 package tgsi.shiftingsystem.model;
 
 import java.sql.Date;
@@ -62,4 +63,5 @@ public class Data {
     public void setStatus(String status) {
         this.status = status;
     }
+    
 }
