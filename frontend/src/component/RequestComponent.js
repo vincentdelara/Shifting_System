@@ -88,12 +88,14 @@ const RequestComponent = () => {
 
                             </table>
                             <div> Date Usage
-                            <DatePicker
-                                selected={reqdate}
-                                onChange={setreqdate}
-                                dateFormat="MMMM d, yyyy"
-                                className="form-control"
-                            />
+                                <DatePicker
+                                    selected={reqdate}
+                                    onChange={setreqdate}
+                                    dateFormat="MMMM d, yyyy"
+                                    className="form-control"
+                                    minDate={new Date()} // Minimum selectable date is today
+                                    maxDate={new Date(data.xpire)} // Maximum selectable date is the value of xpire
+                                />
                             <button className='btn btn-success' onClick={saveData}>Save</button>
                                 <Link to='/shifts' className='btn btn-danger ml-2'>Cancel</Link>
                             </div>
