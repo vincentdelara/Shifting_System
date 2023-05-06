@@ -20,23 +20,27 @@
     </select>
 
     <insert id="insertData" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO users(xpire, end, overtime, otime, start, shifttype, status, enabled)
-        VALUES ( #{xpire}, #{end}, #{overtime}, #{otime}, #{start}, #{shifttype}, #{status}, #{enabled})
+    INSERT INTO users(overtime, otime, start, end, xpire, shifttype, status, proj, remarks, enabled) 
+    VALUES(#{overtime}, #{otime}, #{start}, #{end}, #{xpire}, #{shifttype}, #{status}, #{proj}, #{remarks}, #{enabled})
     </insert>
+    
 
     <update id="updateData">
-        UPDATE users SET
-        xpire = #{xpire},
-        end = #{end},
+        UPDATE users SET 
         overtime = #{overtime},
-        otime = #{otime},
-        start = #{start},
-        shifttype = #{shifttype},
-        status = #{status},
+        otime = #{otime}, 
+        start = #{start}, 
+        end = #{end}, 
+        xpire = #{xpire}, 
+        shifttype = #{shifttype}, 
+        status = #{status} , 
+        proj = #{proj}, 
+        remarks = #{remarks},
         enabled = #{enabled}
         WHERE id = #{id}
     </update>
 
+        
     <delete id="deleteDataById">
         DELETE FROM users WHERE id = #{id}
     </delete>

@@ -44,7 +44,7 @@ const ListShiftComponent = () => {
       <table className='table table-bordered table striped'>
         <thead className='rowcolor'>
           <tr>
-            <th>Render Time</th>
+            <th className='gilid'>Render Time</th>
             <th>From</th>
             <th>To</th>
             <th>Expiration Date</th>
@@ -56,7 +56,7 @@ const ListShiftComponent = () => {
         <tbody>
           {dataArray.map(data =>
             <tr className='laman' id={data.id}>
-              <td>{formatTimeRange(data.overtime, data.otime)}</td>
+              <td className='gilid'>{formatTimeRange(data.overtime, data.otime)}</td>
               <td>{new Date(`2000-01-01T${data.start}`).toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })}</td>
               <td>{new Date(`2000-01-01T${data.end}`).toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })}</td>
               <td>{new Date(data.xpire).toLocaleDateString('en-US', { month: 'long', day: '2-digit', year: 'numeric' })}</td>
@@ -64,9 +64,10 @@ const ListShiftComponent = () => {
               <td>{data.status}</td>
               <td>
                 <div className='updel'>
-                  <Link to={`/request/${data.id}`} className='btn btn-info' href="">Request</Link>
-                  <Link to={`/add-shift/${data.id}`} className='btn btn-info' href="">Update</Link>
-                  <a onClick={(e) => deleteData(e, data.id)} className='btn btn-danger'>Delete</a>
+                  <Link to={`/request/${data.id}`} className='btn btn-info req' href="">Request</Link>
+                  <Link to={`/add-shift/${data.id}`} className='btn btn-info edit' href="">Update</Link>
+                  <a onClick={(e) => deleteData(e, data.id)} className='btn btn-danger list'>
+                    <img src="./assets/deleteicn.svg" alt="Delete" className='icon' /></a>
                 </div>
               </td>
             </tr>

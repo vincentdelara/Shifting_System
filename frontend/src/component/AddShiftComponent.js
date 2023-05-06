@@ -17,17 +17,30 @@ const AddShiftComponent = () => {
     const [xpire, setxpire] = useState('');
     const [shifttype, setshifttype] = useState('');
     const [status, setstatus] = useState('unused');
+    const [proj, setproj] = useState('');
+    const [remarks, setremarks] = useState('');
     const navigate = useNavigate();
     const { id } = useParams();
 
-    const shiftData = { overtime, otime, start, end, xpire, shifttype, status };
+    const shiftData = { overtime, otime, start, end, xpire, shifttype, status, proj, remarks };
 
 
     const handleDateChange = (date) => {
-        setovertime(date);};
+        setovertime(date);
+    };
 
     const handleDateChange2 = (date) => {
-        setotime(date);};
+        setotime(date);
+    };
+
+    const handleProjChange = (event) => {
+        setproj(event.target.value);
+    };
+
+    const handleRemarksChange = (event) => {
+        setremarks(event.target.value);
+    };
+
 
     const Line = () => {
         return <div className="line"></div>;
@@ -41,7 +54,9 @@ const AddShiftComponent = () => {
             shiftData.otime !== "" &&
             shiftData.start !== "" &&
             shiftData.end !== "" &&
-            shiftData.xpire !== ""
+            shiftData.xpire !== "" &&
+            shiftData.proj !== "" &&
+            shiftData.remarks !== "" 
         ) {
             const start = new Date(shiftData.start);
             const end = new Date(shiftData.end);
@@ -115,6 +130,8 @@ const AddShiftComponent = () => {
               setxpire(res.data.xpire);
               setshifttype(res.data.shifttype);
               setstatus(res.data.status);
+              setproj(res.data.proj);
+              setremarks(res.data.remarks);
             })
             .catch(e => console.log(e));
         } else {
@@ -130,55 +147,80 @@ const AddShiftComponent = () => {
             <div className='container mt-5'>
                 <div className='row'>
                     <div className='card col-md-6 offset-md-3'>
-                        <h2 className='text-center'>{tile()}</h2>
-                        <Line />
+                        <nav className='navbar navbar-expand-md loob'>
+                            <h2 className='text-center'>{tile()}</h2>
+                        </nav>
                         <div className='card-body'>
+
                             <form>
-                                <div>
-                                    Start Date
+                                <table className="table table-centered table-spacing">
+                                    <tr>
+                                        
+                                        <td className='td1'>
+                                            
+                                            <div className="form-control outline" >
+                                    <label>Start Date</label>
                                     <DatePicker
                                         selected={overtime}
                                         onChange={handleDateChange}
                                         dateFormat="MMMM d, yyyy"
-                                        className="form-control"
+                                        className="form-control rd"
                                         maxDate={new Date(new Date().setDate(new Date().getDate() - 1))}
                                     />
-                                </div>
-                                <div>
-                                    End Date
+                                    <label>End Date</label>
                                     <DatePicker
                                         selected={otime}
                                         onChange={handleDateChange2}
                                         dateFormat="MMMM d, yyyy"
-                                        className="form-control"
-                                        maxDate={new Date(new Date().setDate(new Date().getDate() - 1))}
-                                    />
-                                </div>
-                                <div>
-                                    Start Time
+                                        className="form-control rd"
+                                        maxDate={new Date(new Date().setDate(new Date().getDate() - 1))}/>
+                                </div></td>
+                                
+                                <td className='td2'>
+                                <div className="form-control outline">
+                                <label>Start Time</label>
                                     <TimePicker
                                         value={start}
                                         onChange={setstart}
                                         showSecond={false}
                                         format="h:mm A"
                                         use12Hours
-                                        className="form-control"
-                                    />
-                                </div>
-                                <div>
-                                    End Time
+                                        className="form-control"/>
+                                    <label>End Time</label>
                                     <TimePicker
                                         value={end}
                                         onChange={setend}
                                         showSecond={false}
                                         format="h:mm A"
                                         use12Hours
+                                        className="form-control" />
+                                </div>
+                                </td>
+                                </tr>
+                                </table>
+                                <div className="form-control outline">
+                                    <label >Project</label>
+                                    <input
+                                        type="text"
+                                        id="projectInput"
                                         className="form-control"
+                                        value={proj}
+                                        onChange={handleProjChange}
+                                    />
+                                    <label>Remarks</label>
+                                    <input
+                                        type="text"
+                                        id="remarksInput"
+                                        className="form-control"
+                                        value={remarks}
+                                        onChange={handleRemarksChange}
                                     />
                                 </div>
-
-                                <button className='btn btn-success' onClick={saveData}>Save</button>
+                                <div className='submitcancel'>
+                                
                                 <Link to='/shifts' className='btn btn-danger ml-2'>Cancel</Link>
+                                <button className='btn btn-success' onClick={saveData}>Submit</button>
+                                </div>
                             </form>
                         </div>
                     </div>

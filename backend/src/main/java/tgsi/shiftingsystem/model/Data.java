@@ -14,6 +14,10 @@ public class Data {
     private Date xpire;
     private String shifttype;
     private String status;
+    private String proj;
+    private String remarks;
+
+
     public Long getId() {
         return id;
     }
@@ -61,5 +65,17 @@ public class Data {
     }
     public void setStatus(String status) {
         this.status = status;
+    }
+    public String getProj() {
+        return proj;
+    }
+    public void setProj(String proj) {
+        this.proj = proj;
+    }
+    public String getRemarks() {
+        return remarks;
+    }
+    public void setRemarks(String remarks) {
+        this.remarks = remarks;
     }
 }

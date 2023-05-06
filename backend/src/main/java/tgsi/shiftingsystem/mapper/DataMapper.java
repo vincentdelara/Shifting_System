@@ -14,11 +14,11 @@ public interface DataMapper {
         @Select("SELECT * FROM users WHERE id = #{id}")
         Data findById(Long id);
     
-        @Insert("INSERT INTO users(overtime, otime, start, end, xpire, shifttype, status) VALUES(#{overtime}, #{otime}, #{start}, #{end}, #{xpire}, #{shifttype}, #{status})")
+        @Insert("INSERT INTO users(overtime, otime, start, end, xpire, shifttype, status, proj, remarks) VALUES(#{overtime}, #{otime}, #{start}, #{end}, #{xpire}, #{shifttype}, #{status}, #{proj}, #{remarks})")
         @Options(useGeneratedKeys = true, keyProperty = "id")
         void insert(Data data);
     
-        @Update("UPDATE users SET overtime = #{overtime}, otime = #{otime}, start = #{start}, end = #{end}, xpire = #{xpire}, shifttype = #{shifttype}, status = #{status} WHERE id = #{id}")
+        @Update("UPDATE users SET overtime = #{overtime}, otime = #{otime}, start = #{start}, end = #{end}, xpire = #{xpire}, shifttype = #{shifttype}, status = #{status} , proj = #{proj}, remarks = #{remarks} WHERE id = #{id}")
         void update(Data data);
     
         @Delete("DELETE FROM users WHERE id = #{id}")

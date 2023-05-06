@@ -59,7 +59,10 @@ const RequestComponent = () => {
             {data &&
                 <div className='row'>
                     <div className='card col-md-6 offset-md-3'>
-                        <h2 className='text-center'>Request Leave</h2>
+                    <nav className='navbar navbar-expand-md loob'>
+                    <h2 className='text-center'>Request Leave</h2>
+                        </nav>
+                        
                         <Line />
                         <div className='card-body'>
                             <table className="table table-centered">
@@ -85,19 +88,33 @@ const RequestComponent = () => {
                                     <td className='bold'>Shift Type:</td>
                                     <td>{data.shifttype}</td>
                                 </tr>
+                                <tr>
+                                    <td className='bold'>Project:</td>
+                                    <td>{data.proj}</td>
+                                </tr>
+                                <tr>
+                                    <td className='bold'>Remarks:</td>
+                                    <td>{data.remarks}</td>
+                                </tr>
 
-                            </table>
-                            <div> Date Usage
+                            </table><div className='dateusagecontainer'>
+                            <label> Date Usage</label>
+                            <div className='dateusage'>
                                 <DatePicker
                                     selected={reqdate}
                                     onChange={setreqdate}
                                     dateFormat="MMMM d, yyyy"
                                     className="form-control"
+                                    placeholderText='Set Date Usage'
                                     minDate={new Date()} // Minimum selectable date is today
                                     maxDate={new Date(data.xpire)} // Maximum selectable date is the value of xpire
                                 />
-                            <button className='btn btn-success' onClick={saveData}>Save</button>
+                                </div>
+                                </div>
+                                <div className='submitcancel'>
                                 <Link to='/shifts' className='btn btn-danger ml-2'>Cancel</Link>
+                            <button className='btn btn-success' onClick={saveData}>Submit</button>
+                                
                             </div>
                         </div>
                     </div>

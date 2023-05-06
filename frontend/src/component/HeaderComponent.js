@@ -9,7 +9,7 @@ const HeaderComponent = () => {
                 <nav className='navbar navbar-expand-md navbar-dark bg-dark p-3'>
                     <div className="navbar-logo">
                         <div>
-                            <img src="./assets/tsukiden.png" alt="Tsukiden" />
+                            <img src="./assets/tsukiden.png" alt="Tsukiden" className='navlogo'/>
                         </div>
 
                     </div>
@@ -20,3 +20,4 @@ const HeaderComponent = () => {
 }
 
 export default HeaderComponent
+
