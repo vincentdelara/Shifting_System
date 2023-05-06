@@ -1,4 +1,3 @@
-//vincentdelara
 package tgsi.shiftingsystem;
 
 import org.mybatis.spring.annotation.MapperScan;

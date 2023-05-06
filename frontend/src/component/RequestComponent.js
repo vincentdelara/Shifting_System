@@ -22,7 +22,6 @@ const RequestComponent = () => {
             .catch(e => console.log(e));
     }, [id]);
 
-    const today = new Date();
 
 
     const Line = () => {
@@ -93,8 +92,6 @@ const RequestComponent = () => {
                                 selected={reqdate}
                                 onChange={setreqdate}
                                 dateFormat="MMMM d, yyyy"
-                                minDate={today}
-                                maxDate={new Date(data.xpire)}
                                 className="form-control"
                             />
                             <button className='btn btn-success' onClick={saveData}>Save</button>

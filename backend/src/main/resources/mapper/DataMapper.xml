@@ -1,4 +1,3 @@
-<!-- vincentdelara -->
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
@@ -17,31 +16,29 @@
     </resultMap>
 
     <select id="getDataById" resultMap="userResultMap">
-        SELECT * FROM datas WHERE id = #{id}
+        SELECT * FROM users WHERE id = #{id}
     </select>
 
     <insert id="insertData" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO datas(overtime, otime, start, end, xpire, shifttype, status, enabled) 
-        VALUES (#{overtime}, #{otime}, #{start}, #{end}, #{xpire}, #{shifttype}, #{status}, #{enabled})
+        INSERT INTO users(xpire, end, overtime, otime, start, shifttype, status, enabled)
+        VALUES ( #{xpire}, #{end}, #{overtime}, #{otime}, #{start}, #{shifttype}, #{status}, #{enabled})
     </insert>
 
-
     <update id="updateData">
-    UPDATE datas SET 
-    overtime = #{overtime}, 
-    otime = #{otime}, 
-    start = #{start}, 
-    end = #{end}, 
-    xpire = #{xpire}, 
-    shifttype = #{shifttype}, 
-    status = #{status},
-    enabled = #{enabled}
-    WHERE id = #{id}
+        UPDATE users SET
+        xpire = #{xpire},
+        end = #{end},
+        overtime = #{overtime},
+        otime = #{otime},
+        start = #{start},
+        shifttype = #{shifttype},
+        status = #{status},
+        enabled = #{enabled}
+        WHERE id = #{id}
     </update>
 
-
     <delete id="deleteDataById">
-        DELETE FROM datas WHERE id = #{id}
+        DELETE FROM users WHERE id = #{id}
     </delete>
 
 </mapper>

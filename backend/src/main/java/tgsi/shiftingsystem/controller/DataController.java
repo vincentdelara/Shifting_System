@@ -1,4 +1,3 @@
-//vincentdelara
 package tgsi.shiftingsystem.controller;
 
 import java.util.List;
@@ -38,7 +37,7 @@ public class DataController {
 
     @PutMapping("/datas/{id}")
     public void updatedata(@PathVariable Long id, @RequestBody Data data) {
-        data.setId(id); 
+        data.setId(id); // set the id of the user
         dataMapper.update(data);
     }
 

@@ -6,14 +6,14 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import TimePicker from 'rc-time-picker';
 import 'rc-time-picker/assets/index.css';
-
+import moment from 'moment';
 import './line.css';
 
 const AddShiftComponent = () => {
     const [overtime, setovertime] = useState(new Date());
     const [otime, setotime] = useState(new Date());
-    const [start, setstart] = useState('');
-    const [end, setend] = useState('');
+    const [start, setstart] = useState(null);
+    const [end, setend] = useState(null);
     const [xpire, setxpire] = useState('');
     const [shifttype, setshifttype] = useState('');
     const [status, setstatus] = useState('unused');
@@ -21,6 +21,13 @@ const AddShiftComponent = () => {
     const { id } = useParams();
 
     const shiftData = { overtime, otime, start, end, xpire, shifttype, status };
+
+
+    const handleDateChange = (date) => {
+        setovertime(date);};
+
+    const handleDateChange2 = (date) => {
+        setotime(date);};
 
     const Line = () => {
         return <div className="line"></div>;
@@ -103,6 +110,8 @@ const AddShiftComponent = () => {
             .then(res => {
               setovertime(new Date(res.data.overtime));
               setotime(new Date(res.data.otime));
+              setstart(moment(`2000-01-01T${res.data.start}`)); // Convert to moment object
+              setend(moment(`2000-01-01T${res.data.end}`)); // Convert to moment object
               setxpire(res.data.xpire);
               setshifttype(res.data.shifttype);
               setstatus(res.data.status);
@@ -114,7 +123,7 @@ const AddShiftComponent = () => {
             setxpire(lastDayOfYear.toLocaleDateString('en-CA').split('/').reverse().join('-'));
           }
         }
-      }, [id, overtime, otime]);
+      }, [id]);
 
     return (
         <div>
@@ -129,20 +138,20 @@ const AddShiftComponent = () => {
                                     Start Date
                                     <DatePicker
                                         selected={overtime}
-                                        onChange={setovertime}
+                                        onChange={handleDateChange}
                                         dateFormat="MMMM d, yyyy"
-                                        maxDate={new Date()}
                                         className="form-control"
+                                        maxDate={new Date(new Date().setDate(new Date().getDate() - 1))}
                                     />
                                 </div>
                                 <div>
                                     End Date
                                     <DatePicker
                                         selected={otime}
-                                        onChange={setotime}
+                                        onChange={handleDateChange2}
                                         dateFormat="MMMM d, yyyy"
-                                        maxDate={new Date()}
                                         className="form-control"
+                                        maxDate={new Date(new Date().setDate(new Date().getDate() - 1))}
                                     />
                                 </div>
                                 <div>
@@ -154,7 +163,6 @@ const AddShiftComponent = () => {
                                         format="h:mm A"
                                         use12Hours
                                         className="form-control"
-                                        placeholder={start}
                                     />
                                 </div>
                                 <div>
