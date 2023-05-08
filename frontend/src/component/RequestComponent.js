@@ -31,23 +31,21 @@ const RequestComponent = () => {
 
     function saveData(e) {
         e.preventDefault();
-    
+
         if (reqdate !== '') {
             const updatedShiftData = {
                 ...data,
-                reqdate: reqdate // Assuming the database expects the date as a Date object
+                reqday: reqdate // Assuming the column name is reqday
             };
-    
-            Shiftservice.saveData(updatedShiftData)
+
+            Shiftservice.updateData(id, updatedShiftData)
                 .then(() => navigate("/shifts"))
                 .catch((e) => console.log(e));
+
         } else {
             alert("Please select a date");
         }
     }
-    
-    
-
 
     function formatDate(date) {
         const formattedDate = new Date(date);
@@ -59,10 +57,10 @@ const RequestComponent = () => {
             {data &&
                 <div className='row'>
                     <div className='card col-md-6 offset-md-3'>
-                    <nav className='navbar navbar-expand-md loob'>
-                    <h2 className='text-center'>Request Leave</h2>
+                        <nav className='navbar navbar-expand-md loob'>
+                            <h2 className='text-center'>Request Leave</h2>
                         </nav>
-                        
+
                         <Line />
                         <div className='card-body'>
                             <table className="table table-centered">
@@ -98,23 +96,23 @@ const RequestComponent = () => {
                                 </tr>
 
                             </table><div className='dateusagecontainer'>
-                            <label> Date Usage</label>
-                            <div className='dateusage'>
-                                <DatePicker
-                                    selected={reqdate}
-                                    onChange={setreqdate}
-                                    dateFormat="MMMM d, yyyy"
-                                    className="form-control"
-                                    placeholderText='Set Date Usage'
-                                    minDate={new Date()} // Minimum selectable date is today
-                                    maxDate={new Date(data.xpire)} // Maximum selectable date is the value of xpire
-                                />
+                                <label> Date Usage</label>
+                                <div className='dateusage'>
+                                    <DatePicker
+                                        selected={reqdate}
+                                        onChange={setreqdate}
+                                        dateFormat="MMMM d, yyyy"
+                                        className="form-control"
+                                        placeholderText='Set Date Usage'
+                                        minDate={new Date()} // Minimum selectable date is today
+                                        maxDate={new Date(data.xpire)} // Maximum selectable date is the value of xpire
+                                    />
                                 </div>
-                                </div>
-                                <div className='submitcancel'>
+                            </div>
+                            <div className='submitcancel'>
                                 <Link to='/shifts' className='btn btn-danger ml-2'>Cancel</Link>
-                            <button className='btn btn-success' onClick={saveData}>Submit</button>
-                                
+                                <button className='btn btn-success' onClick={saveData}>Submit</button>
+
                             </div>
                         </div>
                     </div>

@@ -16,8 +16,9 @@ public class Data {
     private String status;
     private String proj;
     private String remarks;
+    private Date reqday;
 
-
+    
     public Long getId() {
         return id;
     }
@@ -77,5 +78,11 @@ public class Data {
     }
     public void setRemarks(String remarks) {
         this.remarks = remarks;
+    }
+    public Date getReqday() {
+        return reqday;
+    }
+    public void setReqday(Date reqday) {
+        this.reqday = reqday;
     }
 }

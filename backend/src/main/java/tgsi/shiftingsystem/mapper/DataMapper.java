@@ -1,3 +1,4 @@
+//vincentdelara
 package tgsi.shiftingsystem.mapper;
 import java.util.List;
 
@@ -8,20 +9,21 @@ import tgsi.shiftingsystem.model.Data;
 
 @Mapper
 public interface DataMapper {
-        @Select("SELECT * FROM users ORDER BY id DESC")
+        @Select("SELECT * FROM datas ORDER BY id DESC")
         List<Data> findAll();
     
-        @Select("SELECT * FROM users WHERE id = #{id}")
+        @Select("SELECT * FROM datas WHERE id = #{id}")
         Data findById(Long id);
     
-        @Insert("INSERT INTO users(overtime, otime, start, end, xpire, shifttype, status, proj, remarks) VALUES(#{overtime}, #{otime}, #{start}, #{end}, #{xpire}, #{shifttype}, #{status}, #{proj}, #{remarks})")
+        @Insert("INSERT INTO datas(overtime, otime, start, end, xpire, shifttype, status, proj, remarks, reqday) VALUES(#{overtime}, #{otime}, #{start}, #{end}, #{xpire}, #{shifttype}, #{status}, #{proj}, #{remarks}, #{reqday})")
         @Options(useGeneratedKeys = true, keyProperty = "id")
         void insert(Data data);
     
-        @Update("UPDATE users SET overtime = #{overtime}, otime = #{otime}, start = #{start}, end = #{end}, xpire = #{xpire}, shifttype = #{shifttype}, status = #{status} , proj = #{proj}, remarks = #{remarks} WHERE id = #{id}")
+        @Update("UPDATE datas SET overtime = #{overtime}, otime = #{otime}, start = #{start}, end = #{end}, xpire = #{xpire}, shifttype = #{shifttype}, status = #{status} , proj = #{proj}, remarks = #{remarks}, reqday = #{reqday} WHERE id = #{id}")
         void update(Data data);
     
-        @Delete("DELETE FROM users WHERE id = #{id}")
+        
+        @Delete("DELETE FROM datas WHERE id = #{id}")
         void deleteById(Long id);
     }
     

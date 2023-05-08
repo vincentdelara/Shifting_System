@@ -211,7 +211,7 @@
     background-color: #ddfbdd;
     border-width: 0px;
     border-color: #008B00;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9);
+    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.9);
 }
 
 .form-control.outline{
