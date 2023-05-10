@@ -4,8 +4,8 @@ import axios from 'axios';
 const BASE_URL = 'http://localhost:8090';
 
 class UserService {
-  getUserById(user_id) {
-    return axios.get(`${BASE_URL}/user/${user_id}`);
+  getUserById(userId) {
+    return axios.get(`${BASE_URL}/user/${userId}`);
   }
 
   getUserByUsername(username) {

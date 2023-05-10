@@ -2,19 +2,19 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="reglog.user.mapper.UserMapper">
+<mapper namespace="tgsi.shiftingsystem.mapper.UserMapper">
 
 <resultMap id="userResultMap" type="reglog.user.model.User">
-    <id property="iduser" column="iduser" />
+    <id property="userId" column="userId" />
     <result property="username" column="username" />
     <result property="password" column="password" />
     <result property="enabled" column="enabled" />
-    <result property="iduser" column="iduser" />
+    <result property="userId" column="userId" />
 </resultMap>
 
 
    <select id="getUserById" resultMap="userResultMap">
-    SELECT * FROM users WHERE iduser = #{iduser}
+    SELECT * FROM users WHERE userId = #{userId}
 </select>
 
 <select id="getUserByUsername" resultMap="userResultMap">

@@ -2,16 +2,16 @@
 package tgsi.shiftingsystem.model;
 
 public class User {
-    private Long iduser;
+    private Long userId;
     private String username;
     private String password;
 
     
-    public Long getiduser() {
-        return iduser;
+    public Long getuserId() {
+        return userId;
     }
-    public void setiduser(Long iduser) {
-        this.iduser = iduser;
+    public void setuserId(Long userId) {
+        this.userId = userId;
     }    
     public String getUsername() {
         return username;

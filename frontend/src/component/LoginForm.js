@@ -1,6 +1,9 @@
-//vincentdelara
 import React, { useState } from 'react';
 import Userservice from '../service/Userservice';
+import { Form } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
+
+
 
 const LoginForm = () => {
   const [username, setUsername] = useState('');
@@ -25,28 +28,45 @@ const LoginForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <div className='container123'>
       <div>
-        <label>Username:</label>
-        <input
-          type="text"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-        />
+        <img src="./assets/tsukiden.png" alt="Tsukiden" className='loglog' />
       </div>
-      <div>
-        <label>Password:</label>
-        <input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-      </div>
-      <div>
-        <button type="submit">Login</button>
-      </div>
-      {error && <div>{error}</div>}
-    </form>
+      <form onSubmit={handleSubmit}>
+      <h2 class="title">Welcome!</h2>
+        <div>
+          <Form.Group className="mb-3" controlId="formBasicEmail">
+
+            <Form.Control
+              type="text"
+              placeholder="Username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+            />
+          </Form.Group>
+
+
+        </div>
+        <div>
+        <Form.Group className="mb-3" controlId="formBasicPassword">
+  <Form.Control
+    type="password"
+    placeholder="Password"
+    value={password}
+    onChange={(e) => setPassword(e.target.value)}
+  />
+</Form.Group>
+
+        </div>
+        <div>
+        <Button variant="primary" type="submit">
+  Sign In
+</Button>
+
+        </div>
+        {error && <div>{error}</div>}
+      </form>
+    </div>
   );
 };
 

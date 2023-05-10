@@ -1,5 +1,4 @@
 /* vincentdelara */
-/* vincentdelara */
 .btn.btn-primary.mb-2.mt-3 {
     --bs-btn-color: #fff;
     --bs-btn-bg: #008B00;
@@ -267,3 +266,16 @@ padding-left: 3%;
     justify-content: center; 
 }
 
+.loglog{
+    width: 500px; 
+    margin-top: 19%;
+    margin-bottom: 19%;
+    
+}
+
+.container123{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}

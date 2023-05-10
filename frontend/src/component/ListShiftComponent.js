@@ -1,10 +1,10 @@
-//vincentdelara
-import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import Shiftservice from '../service/Shiftservice';
 
 const ListShiftComponent = () => {
   const [dataArray, setDataArray] = useState([]);
+  const [selectedCheckboxes, setSelectedCheckboxes] = useState([]);
 
   useEffect(() => {
     getAllData();
@@ -12,13 +12,18 @@ const ListShiftComponent = () => {
 
   function getAllData() {
     Shiftservice.getAllData()
-      .then(res => { setDataArray(res.data); console.log(res) })
+      .then(res => {
+        setDataArray(res.data);
+        setSelectedCheckboxes(new Array(res.data.length).fill(false));
+      })
       .catch(e => console.log(e));
   }
 
   function deleteData(e, id) {
-    e.preventDefault()
-    Shiftservice.deleteData(id).then(getAllData()).catch(e => console.log(e));
+    e.preventDefault();
+    Shiftservice.deleteData(id)
+      .then(() => getAllData())
+      .catch(e => console.log(e));
   }
 
   function formatTimeRange(overtime, otime) {
@@ -34,6 +39,12 @@ const ListShiftComponent = () => {
     return formattedDate.toLocaleString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
   }
 
+  const handleCheckboxChange = (index) => {
+    const updatedCheckboxes = [...selectedCheckboxes];
+    updatedCheckboxes[index] = !updatedCheckboxes[index];
+    setSelectedCheckboxes(updatedCheckboxes);
+  };
+
   return (
     <div className='container'>
       <div className='wow'>
@@ -43,7 +54,7 @@ const ListShiftComponent = () => {
       </div>
       <table className='table table-bordered table striped'>
         <thead className='rowcolor'>
-          <tr>
+          <tr><th className='tsek'></th>
             <th className='gilid'>Render Time</th>
             <th>From</th>
             <th>To</th>
@@ -54,8 +65,14 @@ const ListShiftComponent = () => {
           </tr>
         </thead>
         <tbody>
-          {dataArray.map(data =>
-            <tr className='laman' id={data.id}>
+          {dataArray.map((data, index) => (
+            <tr className='laman' key={data.id}>
+              <td><input
+                    type="checkbox"
+                    checked={selectedCheckboxes[index]}
+                    onChange={() => handleCheckboxChange(index)}
+                  />
+                  </td>
               <td className='gilid'>{formatTimeRange(data.overtime, data.otime)}</td>
               <td>{new Date(`2000-01-01T${data.start}`).toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })}</td>
               <td>{new Date(`2000-01-01T${data.end}`).toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })}</td>
@@ -67,15 +84,17 @@ const ListShiftComponent = () => {
                   <Link to={`/request/${data.id}`} className='btn btn-info req' href="">Request</Link>
                   <Link to={`/add-shift/${data.id}`} className='btn btn-info edit' href="">Update</Link>
                   <a onClick={(e) => deleteData(e, data.id)} className='btn btn-danger list'>
-                    <img src="./assets/deleteicn.svg" alt="Delete" className='icon' /></a>
+                    <img src="./assets/deleteicn.svg" alt="Delete" className='icon' />
+                  </a>                  
                 </div>
               </td>
             </tr>
-          )}
+          ))}
         </tbody>
       </table>
     </div>
   );
-}
+};
 
 export default ListShiftComponent;
+

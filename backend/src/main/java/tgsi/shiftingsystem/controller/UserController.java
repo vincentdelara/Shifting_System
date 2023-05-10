@@ -1,4 +1,3 @@
-//vincentdelara
 package tgsi.shiftingsystem.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,9 +20,9 @@ public class UserController {
     @Autowired
     private UserMapper userMapper;
    
-    @GetMapping("/user/{iduser}")
-    public User getUserById(@PathVariable Long iduser) {
-        return userMapper.getUserById(iduser);
+    @GetMapping("/user/{userId}")
+    public User getUserById(@PathVariable Long userId) {
+        return userMapper.getUserById(userId);
     }
 
     @GetMapping("/username/{username}")
