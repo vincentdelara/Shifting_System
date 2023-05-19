@@ -1,4 +1,3 @@
-//vincentdelara
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Shiftservice from '../service/Shiftservice';
@@ -7,6 +6,8 @@ const ListShiftComponent = () => {
   const [dataArray, setDataArray] = useState([]);
   const [selectedCheckboxes, setSelectedCheckboxes] = useState([]);
 
+  const loggedInUser = localStorage.getItem('loggedInUser');
+
   useEffect(() => {
     getAllData();
   }, []);
@@ -14,8 +15,10 @@ const ListShiftComponent = () => {
   function getAllData() {
     Shiftservice.getAllData()
       .then(res => {
-        setDataArray(res.data);
-        setSelectedCheckboxes(new Array(res.data.length).fill(false));
+        // Filter the data array based on the logged-in user
+        const filteredData = res.data.filter(data => data.username === loggedInUser);
+        setDataArray(filteredData);
+        setSelectedCheckboxes(new Array(filteredData.length).fill(false));
       })
       .catch(e => console.log(e));
   }

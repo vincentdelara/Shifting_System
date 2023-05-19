@@ -21,8 +21,8 @@
     </select>
 
     <insert id="insertData" useGeneratedKeys="true" keyProperty="id">
-    INSERT INTO datas(overtime, otime, start, end, xpire, shifttype, status, proj, remarks, reqday, enabled) 
-    VALUES(#{overtime}, #{otime}, #{start}, #{end}, #{xpire}, #{shifttype}, #{status}, #{proj}, #{remarks}, #{reqday}, #{enabled})
+    INSERT INTO datas(overtime, otime, start, end, xpire, shifttype, status, proj, remarks, reqday, username, enabled) 
+    VALUES(#{overtime}, #{otime}, #{start}, #{end}, #{xpire}, #{shifttype}, #{status}, #{proj}, #{remarks}, #{reqday}, #{username}, #{enabled})
     </insert>
     
 

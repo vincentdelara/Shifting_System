@@ -1,4 +1,3 @@
-//vincentdelara
 import React, { useState } from 'react';
 import Userservice from '../service/Userservice';
 
@@ -17,6 +16,13 @@ const RegistrationForm = () => {
     }
 
     try {
+      // Check if the username already exists
+      const existingUser = await Userservice.getUserByUsernamereg(username);
+      if (existingUser) {
+        setError('Username already exists. Please choose a different username.');
+        return;
+      }
+
       await Userservice.registerUser({ username, password });
       // Registration successful
       setError('');

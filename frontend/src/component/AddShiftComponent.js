@@ -19,11 +19,18 @@ const AddShiftComponent = () => {
     const [status, setstatus] = useState('unused');
     const [proj, setproj] = useState('');
     const [remarks, setremarks] = useState('');
+    const [username, setUsername] = useState('');    
     const navigate = useNavigate();
     const { id } = useParams();
 
-    const shiftData = { overtime, otime, start, end, xpire, shifttype, status, proj, remarks };
+    const shiftData = { overtime, otime, start, end, xpire, shifttype, status, proj, remarks, username };
 
+    useEffect(() => {
+        const storedUsername = localStorage.getItem('loggedInUser');
+        if (storedUsername) {
+            setUsername(storedUsername);
+        }
+    }, []);
 
     const handleDateChange = (date) => {
         setovertime(date);
@@ -78,6 +85,10 @@ const AddShiftComponent = () => {
                 shiftData.shifttype = "8 Hour Shifting";
             }
 
+
+           
+
+              
             // Format start and end times
             const formattedStart = start.toLocaleTimeString("en-US", {
                 hour12: false,

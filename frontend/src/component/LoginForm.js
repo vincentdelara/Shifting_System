@@ -1,4 +1,3 @@
-//vincentdelara
 import React, { useState } from 'react';
 import Userservice from '../service/Userservice';
 import { Form } from 'react-bootstrap';
@@ -12,21 +11,23 @@ const LoginForm = () => {
   const [error, setError] = useState('');
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    try {
-      const response = await Userservice.getUserByUsername(username);
-      if (response.data.password === password) {
-        // Login successful
-        setError('');
-        window.location.href = "/list";
-      } else {
-        setError('Invalid username or password');
-      }
-    } catch (error) {
+  try {
+    const response = await Userservice.getUserByUsername(username);
+    if (response.data.password === password) {
+      // Login successful
+      setError('');
+      localStorage.setItem('loggedInUser', username); // Store username in local storage
+      window.location.href = "/list";
+    } else {
       setError('Invalid username or password');
     }
-  };
+  } catch (error) {
+    setError('Invalid username or password');
+  }
+};
+
 
   return (
     <div className='container123'>

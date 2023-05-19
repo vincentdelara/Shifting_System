@@ -15,7 +15,7 @@ public interface DataMapper {
         @Select("SELECT * FROM datas WHERE id = #{id}")
         Data findById(Long id);
     
-        @Insert("INSERT INTO datas(overtime, otime, start, end, xpire, shifttype, status, proj, remarks, reqday) VALUES(#{overtime}, #{otime}, #{start}, #{end}, #{xpire}, #{shifttype}, #{status}, #{proj}, #{remarks}, #{reqday})")
+        @Insert("INSERT INTO datas(overtime, otime, start, end, xpire, shifttype, status, proj, remarks, reqday, username) VALUES(#{overtime}, #{otime}, #{start}, #{end}, #{xpire}, #{shifttype}, #{status}, #{proj}, #{remarks}, #{reqday}, #{username})")
         @Options(useGeneratedKeys = true, keyProperty = "id")
         void insert(Data data);
     

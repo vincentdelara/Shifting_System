@@ -12,7 +12,7 @@ const RequestComponent = () => {
     const navigate = useNavigate();
     const { id } = useParams();
 
-    const shiftData = { reqdate };
+   
 
     useEffect(() => {
         Shiftservice.getDataById(id)
