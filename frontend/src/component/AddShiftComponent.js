@@ -16,7 +16,7 @@ const AddShiftComponent = () => {
     const [end, setend] = useState(null);
     const [xpire, setxpire] = useState('');
     const [shifttype, setshifttype] = useState('');
-    const [status, setstatus] = useState('unused');
+    const [status, setstatus] = useState('Unused');
     const [proj, setproj] = useState('');
     const [remarks, setremarks] = useState('');
     const [username, setUsername] = useState('');    
@@ -82,7 +82,7 @@ const AddShiftComponent = () => {
             } else if (shiftDuration < 8) {
                 shiftData.shifttype = "4 Hours Shifting";
             } else {
-                shiftData.shifttype = "8 Hour Shifting";
+                shiftData.shifttype = "8 Hours Shifting";
             }
 
 

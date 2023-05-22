@@ -22,7 +22,7 @@ const HeaderComponent = () => {
 
   return (
     <Navbar bg="light" expand="lg">
-      <Navbar.Brand href="/"><img src="./assets/tsukiden.png" alt="Tsukiden" className='navlogo'/></Navbar.Brand>
+      <Navbar.Brand href="/"><img src="./assets/smol.png" alt="Tsukiden" className='navlogo'/></Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="ml-auto">
