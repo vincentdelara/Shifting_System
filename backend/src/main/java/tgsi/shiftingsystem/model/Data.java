@@ -18,8 +18,15 @@ public class Data {
     private String remarks;
     private Date reqday;
     private String username;
+    private String partnerId;
 
     
+    public String getPartnerId() {
+        return partnerId;
+    }
+    public void setPartnerId(String partnerId) {
+        this.partnerId = partnerId;
+    }
     public String getUsername() {
         return username;
     }

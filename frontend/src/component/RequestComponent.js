@@ -35,7 +35,7 @@ const RequestComponent = () => {
         if (reqdate !== '') {
             const updatedShiftData = {
                 ...data,
-                reqday: reqdate // Assuming the column name is reqday
+                reqday: reqdate 
             };
 
             Shiftservice.updateData(id, updatedShiftData)
