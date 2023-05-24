@@ -238,10 +238,19 @@ const ListShiftComponent = () => {
               <td>{data.shifttype}</td>
               <td>{data.status}</td>
               <td>
+
                 <div className='updel'>
                   {data.shifttype === '8 Hours Shifting' && ( //show button if 8 hours shift
-                    <Link to={`/request/${data.id}`} className='btn btn-info req' href="">Request</Link>
+                    <Link
+                      to={`/request/${data.id}`}
+                      className={`btn btn-info req ${data.reqday ? 'disabled' : ''}`}
+                      href=''
+                      disabled={data.reqday ? true : false}
+                    >
+                      Request
+                    </Link>
                   )}
+
                   {data.shifttype === '4 Hours Shifting' && (//show button if 4 hours shift
                     <button
                       className='btn btn-info req'
@@ -252,8 +261,19 @@ const ListShiftComponent = () => {
                     </button>
 
                   )}
-                  <Link to={`/add-shift/${data.id}`} className='btn btn-info edit' href="">Update</Link>
-                  <a onClick={(e) => deleteData(e, data.id)} className='btn btn-danger list'>
+
+                  <Link
+                    to={`/add-shift/${data.id}`}
+                    className={`btn btn-info edit ${data.reqday !== null ? 'disabled' : ''}`} // Add the disabled class if reqday is not empty
+                    href=""
+                  >
+                    Update
+                  </Link>
+
+                  <a
+                    onClick={(e) => deleteData(e, data.id)}
+                    className={`btn btn-danger list ${data.reqday !== null ? 'disabled' : ''}`} // Add the disabled class if reqday is not empty
+                  >
                     <img src="./assets/deleteicn.svg" alt="Delete" className='icon' />
                   </a>
                 </div>
@@ -331,70 +351,68 @@ const ListShiftComponent = () => {
         </div>
       )}
 
-      {isModalOpen2 && (
-        <div className="modal" style={{ display: 'block' }}>
-          <div className="modal-dialog">
-            <div className="modal-content">
-              <div className="modal-header">
-                <h5 className="modal-title">Filters</h5>
-                <button type="button" className="close" onClick={handleModalClose2}>
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div className="modal-body">
-                <div className="mt-3">
-                  <label htmlFor="leaveDate">Leave Date:</label>
-                  <DatePicker
-                    selected={leaveDate}
-                    onChange={date => setLeaveDate(date)}
-                    dateFormat="MMMM d, yyyy"
-                    className="form-control"
-                    id="leaveDate"
-                    placeholderText="Select Date"
-                    minDate={new Date()}
-                    maxDate={new Date(data.xpire)}
-                  />
-                </div>
-              </div>
-              <div className="modal-body">
-                {selectedRowsData.map((row, index) => (
-                  <div key={index}>
-                    <h5>Row {index + 1}</h5>
-                    <p>Overtime: {formatDate(row.overtime)}</p>
-                    <p>Otime: {formatDate(row.otime)}</p>
-                    <p>Start: {formatTime(row.start)}</p>
-                    <p>End: {formatTime(row.end)}</p>
-                    <p>Xpire: {formatDate(row.xpire)}</p>
-                    <p>Shift Type: {row.shifttype}</p>
-                    <p>Status: {row.status}</p>
-                    <p>Proj: {row.proj}</p>
-                    <p>Remarks: {row.remarks}</p>
-                  </div>
-                ))}
-                <div className="mt-3">
-                  <label htmlFor="leaveDate">Leave Date:</label>
-                  <DatePicker
-                    selected={leaveDate}
-                    onChange={date => setLeaveDate(date)}
-                    dateFormat="MMMM d, yyyy"
-                    className="form-control"
-                    id="leaveDate"
-                    placeholderText="Select Date"
-                    minDate={new Date()}
-                    maxDate={new Date(selectedRowsData[0].xpire)} // Assuming both selected rows have the same xpire value
-                  />
-                </div>
-              </div>
-              <div className="modal-footer">
-                <button className="btn btn-primary ml-2" onClick={() => { addLeaveDate(); handleModalClose2(); }}>
-                  Done
-                </button>
-
-              </div>
-            </div>
-          </div>
+{isModalOpen2 && (
+  <div className="modal req" style={{ display: 'block' }}>
+    <div className="modal-dialog2">
+      <div className="modal-content">
+        <div className="modal-header">
+          <h5 className="modal-title">Request Leave</h5>
         </div>
-      )}
+        <div className="modal-body2">
+        <div className="d-flex justify-content-center">
+  <div className="row">
+    {selectedRowsData.map((row, index) => (
+      <div className="col" key={index}>
+        <h5>Shift {index + 1}</h5>
+        <p><strong>Overtime:</strong> {row.overtime !== row.otime
+          ? `${formatDate(row.overtime)} to ${formatDate(row.otime)}`
+          : formatDate(row.overtime)}</p>
+        <p><strong>Start:</strong> {formatTime(row.start)}</p>
+        <p><strong>End:</strong> {formatTime(row.end)}</p>
+        <p><strong>Xpire:</strong> {formatDate(row.xpire)}</p>
+        <p><strong>Shift Type:</strong> {row.shifttype}</p>
+        <p><strong>Status:</strong> {row.status}</p>
+        <p><strong>Proj:</strong> {row.proj}</p>
+        <p><strong>Remarks:</strong> {row.remarks}</p>
+      </div>
+    ))}
+  </div>
+</div>
+
+<div className="mt-3 d-flex align-items-center">
+  <label className='rd ttl'>Leave Date:</label>
+  <div style={{ flex: '1' }}>
+    <DatePicker 
+      selected={leaveDate}
+      onChange={(date) => setLeaveDate(date)}
+      dateFormat="MMMM d, yyyy"
+      className="form-control rd"
+      id="leaveDate"
+      placeholderText="Select Date"
+      minDate={new Date()}
+      maxDate={new Date(selectedRowsData[0].xpire)} // Assuming both selected rows have the same xpire value
+    />
+  </div>
+</div>
+
+
+        </div>
+        
+        <div className="modal-footer req">
+        <button className="btn btn-primary ml-2 cancel" onClick={handleModalClose2}>
+            Cancel
+          </button>
+          <button className="btn btn-primary ml-2 submit" onClick={() => { addLeaveDate(); handleModalClose2(); }}>
+            Submit haha
+          </button>
+
+          
+        </div>
+      </div>
+    </div>
+  </div>
+)}
+
 
 
     </div>

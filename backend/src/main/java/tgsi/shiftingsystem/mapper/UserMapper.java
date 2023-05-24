@@ -9,15 +9,13 @@ import tgsi.shiftingsystem.model.User;
 public interface UserMapper {
     @Select("SELECT * FROM users WHERE userId = #{userId}")
     User getUserById(Long userId);
-    
 
     @Select("SELECT * FROM users WHERE username = #{username}")
     User getUserByUsername(String username);    
 
-    @Insert("INSERT INTO users (username, password) VALUES (#{username}, #{password})")
+    @Insert("INSERT INTO users (firstname, middlename, lastname, username, email, password, business_unit, position) VALUES (#{firstname}, #{middlename}, #{lastname}, #{username}, #{email}, #{password}, #{business_unit}, #{position})")
     @Options(useGeneratedKeys = true, keyProperty = "userId")
     void createUser(User user);
-    
     
 }
 

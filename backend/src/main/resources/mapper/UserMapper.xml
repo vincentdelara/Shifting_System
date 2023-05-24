@@ -19,7 +19,7 @@
     </select>
 
     <insert id="createUser">
-        INSERT INTO users (username, password) VALUES (#{username}, #{password})
+        INSERT INTO users (firstname, middlename, lastname, username, email, password, business_unit, position) VALUES (#{firstname}, #{middlename}, #{lastname}, #{username}, #{email}, #{password}, #{business_unit}, #{position})
     </insert>
 
 </mapper>

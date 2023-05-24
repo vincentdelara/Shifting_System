@@ -4,15 +4,16 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import Shiftservice from '../service/Shiftservice';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import './line.css';
 
 const RequestComponent = () => {
     const [data, setData] = useState(null);
     const [reqdate, setreqdate] = useState('');
     const navigate = useNavigate();
+    const [dateError, setDateError] = useState('');
+
     const { id } = useParams();
 
-   
+
 
     useEffect(() => {
         Shiftservice.getDataById(id)
@@ -22,20 +23,13 @@ const RequestComponent = () => {
             .catch(e => console.log(e));
     }, [id]);
 
-
-
-    const Line = () => {
-        return <div className="line"></div>;
-    };
-
-
     function saveData(e) {
         e.preventDefault();
 
         if (reqdate !== '') {
             const updatedShiftData = {
                 ...data,
-                reqday: reqdate 
+                reqday: reqdate
             };
 
             Shiftservice.updateData(id, updatedShiftData)
@@ -43,7 +37,7 @@ const RequestComponent = () => {
                 .catch((e) => console.log(e));
 
         } else {
-            alert("Please select a date");
+            setDateError("Please select a date");
         }
     }
 
@@ -61,7 +55,7 @@ const RequestComponent = () => {
                             <h2 className='text-center'>Request Leave</h2>
                         </nav>
 
-                        <Line />
+                     
                         <div className='card-body'>
                             <table className="table table-centered">
                                 <tr>
@@ -107,6 +101,7 @@ const RequestComponent = () => {
                                         minDate={new Date()} // Minimum selectable date is today
                                         maxDate={new Date(data.xpire)} // Maximum selectable date is the value of xpire
                                     />
+                                    {dateError && <div className="text-danger">{dateError}</div>}
                                 </div>
                             </div>
                             <div className='submitcancel'>
