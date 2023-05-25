@@ -1,5 +1,7 @@
 //vincentdelara
-import React, { useEffect, useState } from 'react'
+
+
+import React, { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import Shiftservice from '../service/Shiftservice';
 import DatePicker from 'react-datepicker';
@@ -7,13 +9,11 @@ import 'react-datepicker/dist/react-datepicker.css';
 
 const RequestComponent = () => {
     const [data, setData] = useState(null);
-    const [reqdate, setreqdate] = useState('');
-    const navigate = useNavigate();
+    const [reqdate, setReqdate] = useState('');
     const [dateError, setDateError] = useState('');
+    const navigate = useNavigate();
 
     const { id } = useParams();
-
-
 
     useEffect(() => {
         Shiftservice.getDataById(id)
@@ -35,7 +35,6 @@ const RequestComponent = () => {
             Shiftservice.updateData(id, updatedShiftData)
                 .then(() => navigate("/shifts"))
                 .catch((e) => console.log(e));
-
         } else {
             setDateError("Please select a date");
         }
@@ -55,7 +54,6 @@ const RequestComponent = () => {
                             <h2 className='text-center'>Request Leave</h2>
                         </nav>
 
-                     
                         <div className='card-body'>
                             <table className="table table-centered">
                                 <tr>
@@ -88,35 +86,35 @@ const RequestComponent = () => {
                                     <td className='bold'>Remarks:</td>
                                     <td>{data.remarks}</td>
                                 </tr>
-
-                            </table><div className='dateusagecontainer'>
-                                <label> Date Usage</label>
-                                <div className='dateusage'>
+                            </table>
+                            <div className='dateusagecontainer'>
+                                <label className='du ttl'> Date Usage</label>
+                                <div className='row'>
                                     <DatePicker
                                         selected={reqdate}
-                                        onChange={setreqdate}
+                                        onChange={date => setReqdate(date)}
                                         dateFormat="MMMM d, yyyy"
-                                        className="form-control"
-                                        placeholderText='Set Date Usage'
+                                        className={`form-control rc ${dateError ? 'is-invalid' : ''}`}
+                                        placeholderText={dateError ? dateError : 'Set Date Usage'}
                                         minDate={new Date()} // Minimum selectable date is today
                                         maxDate={new Date(data.xpire)} // Maximum selectable date is the value of xpire
                                     />
-                                    {dateError && <div className="text-danger">{dateError}</div>}
                                 </div>
+
                             </div>
+
+
+
                             <div className='submitcancel'>
                                 <Link to='/shifts' className='btn btn-danger ml-2'>Cancel</Link>
                                 <button className='btn btn-success' onClick={saveData}>Submit</button>
-
                             </div>
                         </div>
                     </div>
                 </div>
             }
         </div>
-    )
+    );
+};
 
-}
-
-export default RequestComponent
-
+export default RequestComponent;

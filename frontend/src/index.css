@@ -184,6 +184,7 @@
 
 .form-control{
     margin-bottom: 20px;
+    background-color: #000000;
 }
 
 .bold{
@@ -208,6 +209,7 @@
 
 .form-control.rd{
     height: 44px; 
+    border-radius: 50rem;
 }
 
 
@@ -377,6 +379,25 @@ padding-left: 3%;
     display: none;
   }
   
+/* REQUEST COMPONENT ################################################### */
+  
+ .form-control.is-invalid::placeholder {
+  color: red;
+}
+
+.du.ttl{
+  margin-right: 1.5%;
+  margin-bottom: 2.6%;
+}
+
+
+.dateusagecontainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* REQUEST COMPONENT ################################################### */
 
 
   /* MODAL ################################################### */
@@ -393,6 +414,8 @@ padding-left: 3%;
     padding-top: 10%;
   }
   
+  
+
   .modal-dialog {
     max-width: 600px;
     margin: 100px auto;
@@ -447,8 +470,8 @@ padding-left: 3%;
     border-color: #80bdff;
     box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
   }
-    
 
+ 
   .filter-form {
     display: flex;
     flex-wrap: wrap;
@@ -466,28 +489,28 @@ padding-left: 3%;
     margin-right: 0; 
     
   }
-
-  .close{
-    background-color: #ffffff;
-    border-radius: 100%;
-    border-color: #00000000;
-  }
   
+  .form-group label {
+    display: block;
+    text-align: center;
+  }
+
   /* MODAL ################################################### */
 
 
    /* MODAL2 ################################################### */
   .modal-dialog2 {
-    max-width: 50%;
+    max-width: 45%;
     margin: 100px auto;
     background-color: #ddfbdd;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    
   }
 
+
   .modal-body2 {
-    padding: 50px;
+   padding-left: 15%;
+   padding-top: 5%;
     background-color: #ddfbdd;
   }
 
@@ -496,7 +519,8 @@ padding-left: 3%;
   }
 
   .col{
-    margin: -5%;
+   margin-left: -7%;
+  
   }
 
   .modal-footer.req{
@@ -506,12 +530,13 @@ background-color: #ddfbdd;
   .rd.ttl{
     margin-bottom: 5%;
     margin-right: 2%;
+
   }
 
 .mt-3.d-flex.align-items-center{
 padding-top: 3%;
 width: 50%;
-margin: 0 auto;
+margin-left: 8%;
 }
 
 .btn.btn-primary.ml-2.cancel{
@@ -552,4 +577,36 @@ margin: 0 auto;
 }
 
 
+.selected {
+  text-align: left;
+  padding: 20px;
+}
+
+
+
+.selected p {
+  margin: 0;
+}
+
  /* MODAL2 ################################################### */
+
+
+  /* create acc ################################################### */
+ 
+
+  .custom-control123{
+    border-radius: 100rem; /* Adjust this value for desired curvature */
+  }
+  
+  /* create acc ################################################### */
+ 
+
+  .form-control.rc{
+    border-radius: 50rem;
+    text-align-last: center;
+  }
+  
+  
+  
+
+  

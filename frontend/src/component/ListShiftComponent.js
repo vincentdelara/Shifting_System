@@ -284,72 +284,81 @@ const ListShiftComponent = () => {
       </table>
 
       {isModalOpen && (
-        <div className="modal" style={{ display: 'block' }}>
-          <div className="modal-dialog">
-            <div className="modal-content">
-              <div className="modal-header">
-                <h5 className="modal-title">Filters</h5>
-                <button type="button" className="close" onClick={handleModalClose}>
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div className="modal-body">
-                <form className="filter-form">
-                  <div className="form-group">
-                    <label htmlFor="filterMonth">Month</label>
-                    <select id="filterMonth" className="form-control" value={filterMonth} onChange={(e) => setFilterMonth(e.target.value)}>
-                      <option value="All">All Months</option>
-                      <option value="1">January</option><option value="2">February</option><option value="3">March</option>
-                      <option value="4">April</option><option value="5">May</option><option value="6">June</option>
-                      <option value="7">July</option><option value="8">August</option><option value="9">September</option>
-                      <option value="10">October</option><option value="11">November</option><option value="12">December</option>
-                    </select>
-                  </div>
-                  <div className="form-group">
-                    <label htmlFor="filterDay">Day</label>
-                    <select id="filterDay" className="form-control" value={filterDay} onChange={(e) => setFilterDay(e.target.value)}>
-                      <option value="All">All Days</option>
-                      {Array.from({ length: 31 }, (_, i) => i + 1).map((day) => (
-                        <option key={day} value={day}>{day}</option>
-                      ))}
-                    </select>
-                  </div>
-                  <div className="form-group">
-                    <label htmlFor="filterYear">Year</label>
-                    <select id="filterYear" className="form-control" value={filterYear} onChange={(e) => setFilterYear(e.target.value)}>
-                      <option value="All">All Years</option>
-                      <option value="2022">2022</option><option value="2023">2023</option>
-                      <option value="2024">2024</option><option value="2025">2025</option>
-                    </select>
-                  </div>
-                  <div className="form-group">
-                    <label htmlFor="filterShiftType">Shift Type</label>
-                    <select id="filterShiftType" className="form-control" value={filterShiftType} onChange={(e) => setFilterShiftType(e.target.value)}>
-                      <option value="All">All Types</option>
-                      <option value="4 Hours Shifting">4 Hours Shifting</option>
-                      <option value="8 Hours Shifting">8 Hours Shifting</option>
-                    </select>
-                  </div>
-                  <div className="form-group">
-                    <label htmlFor="filterStatus">Status</label>
-                    <select id="filterStatus" className="form-control" value={filterStatus} onChange={(e) => setFilterStatus(e.target.value)}>
-                      <option value="All">All</option>
-                      <option value="Unused">Unused</option>
-                      <option value="Pending">Pending</option>
-                      <option value="Approved">Approved</option>
-                      <option value="Expired">Expired</option>
-                    </select>
-                  </div>
-                </form>
-              </div>
-              <div className="modal-footer">
-                <button type="button" className="btn btn-secondary" onClick={clearFilters}>Clear Filters</button>
-                <button type="button" className="btn btn-primary" onClick={handleModalClose}>Done</button>
-              </div>
-            </div>
-          </div>
+  <div className="modal" style={{ display: 'block' }}>
+    <div className="modal-dialog">
+      <div className="modal-content">
+        <div className="modal-header">
+          <h5 className="modal-title">Filters</h5>
         </div>
-      )}
+        <div className="modal-body">
+          <form className="filter-form">
+            <div className="form-group">
+              <label htmlFor="filterMonth">Month</label>
+              <select id="filterMonth" className="form-control rc" value={filterMonth} onChange={(e) => setFilterMonth(e.target.value)}>
+                <option value="All">All Months</option>
+                <option value="1">January</option>
+                <option value="2">February</option>
+                <option value="3">March</option>
+                <option value="4">April</option>
+                <option value="5">May</option>
+                <option value="6">June</option>
+                <option value="7">July</option>
+                <option value="8">August</option>
+                <option value="9">September</option>
+                <option value="10">October</option>
+                <option value="11">November</option>
+                <option value="12">December</option>
+              </select>
+            </div>
+            <div className="form-group">
+              <label htmlFor="filterDay">Day</label>
+              <select id="filterDay" className="form-control rc" value={filterDay} onChange={(e) => setFilterDay(e.target.value)}>
+                <option value="All">All Days</option>
+                {Array.from({ length: 31 }, (_, i) => i + 1).map((day) => (
+                  <option key={day} value={day}>{day}</option>
+                ))}
+              </select>
+            </div>
+            <div className="form-group">
+              <label htmlFor="filterYear">Year</label>
+              <select id="filterYear" className="form-control rc" value={filterYear} onChange={(e) => setFilterYear(e.target.value)}>
+                <option value="All">All Years</option>
+                <option value="2022">2022</option>
+                <option value="2023">2023</option>
+                <option value="2024">2024</option>
+                <option value="2025">2025</option>
+              </select>
+            </div>
+            <div className="form-group">
+              <label htmlFor="filterShiftType">Shift Type</label>
+              <select id="filterShiftType" className="form-control rc" value={filterShiftType} onChange={(e) => setFilterShiftType(e.target.value)}>
+                <option value="All">All Types</option>
+                <option value="4 Hours Shifting">4 Hours Shifting</option>
+                <option value="8 Hours Shifting">8 Hours Shifting</option>
+              </select>
+            </div>
+            <div className="form-group">
+              <label htmlFor="filterStatus">Status</label>
+              <select id="filterStatus" className="form-control rc" value={filterStatus} onChange={(e) => setFilterStatus(e.target.value)}>
+                <option value="All">All</option>
+                <option value="Unused">Unused</option>
+                <option value="Pending">Pending</option>
+                <option value="Approved">Approved</option>
+                <option value="Expired">Expired</option>
+              </select>
+            </div>
+          </form>
+        </div>
+        <div className="modal-footer">
+          <button type="button" className="btn btn-secondary" onClick={clearFilters}>Clear Filters</button>
+          <button type="button" className="btn btn-primary" onClick={handleModalClose}>Done</button>
+        </div>
+      </div>
+    </div>
+  </div>
+)}
+
+
 
 {isModalOpen2 && (
   <div className="modal req" style={{ display: 'block' }}>
@@ -363,32 +372,33 @@ const ListShiftComponent = () => {
   <div className="row">
     {selectedRowsData.map((row, index) => (
       <div className="col" key={index}>
-        <h5>Shift {index + 1}</h5>
-        <p><strong>Overtime:</strong> {row.overtime !== row.otime
+       
+        <td className='selected'> 
+        <p><strong>Render Time:</strong> {row.overtime !== row.otime 
           ? `${formatDate(row.overtime)} to ${formatDate(row.otime)}`
           : formatDate(row.overtime)}</p>
-        <p><strong>Start:</strong> {formatTime(row.start)}</p>
-        <p><strong>End:</strong> {formatTime(row.end)}</p>
-        <p><strong>Xpire:</strong> {formatDate(row.xpire)}</p>
+        <p><strong>Start Time:</strong> {formatTime(row.start)}</p>
+        <p><strong>End Time:</strong> {formatTime(row.end)}</p>
+        <p><strong>Expiration Date:</strong> {formatDate(row.xpire)}</p>
         <p><strong>Shift Type:</strong> {row.shifttype}</p>
-        <p><strong>Status:</strong> {row.status}</p>
-        <p><strong>Proj:</strong> {row.proj}</p>
+        <p><strong>Project:</strong> {row.proj}</p>
         <p><strong>Remarks:</strong> {row.remarks}</p>
+        </td>
       </div>
     ))}
   </div>
 </div>
 
 <div className="mt-3 d-flex align-items-center">
-  <label className='rd ttl'>Leave Date:</label>
+  <label className='rd ttl'>Date Usage</label>
   <div style={{ flex: '1' }}>
     <DatePicker 
       selected={leaveDate}
       onChange={(date) => setLeaveDate(date)}
       dateFormat="MMMM d, yyyy"
-      className="form-control rd"
+      className="form-control rc"
       id="leaveDate"
-      placeholderText="Select Date"
+      placeholderText="Set Date Usage"
       minDate={new Date()}
       maxDate={new Date(selectedRowsData[0].xpire)} // Assuming both selected rows have the same xpire value
     />

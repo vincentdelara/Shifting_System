@@ -175,7 +175,7 @@ const AddShiftComponent = () => {
                                         selected={overtime}
                                         onChange={handleDateChange}
                                         dateFormat="MMMM d, yyyy"
-                                        className="form-control rd"
+                                        className="form-control rc"
                                         maxDate={new Date(new Date().setDate(new Date().getDate() - 1))}
                                     />
                                     <label>End Date</label>
@@ -183,7 +183,7 @@ const AddShiftComponent = () => {
                                         selected={otime}
                                         onChange={handleDateChange2}
                                         dateFormat="MMMM d, yyyy"
-                                        className="form-control rd"
+                                        className="form-control rc"
                                         maxDate={new Date(new Date().setDate(new Date().getDate() - 1))}/>
                                 </div></td>
                                 
@@ -196,7 +196,7 @@ const AddShiftComponent = () => {
                                         showSecond={false}
                                         format="h:mm A"
                                         use12Hours
-                                        className="form-control"/>
+                                        className="form-control rc"/>
                                     <label>End Time</label>
                                     <TimePicker
                                         value={end}
@@ -204,7 +204,7 @@ const AddShiftComponent = () => {
                                         showSecond={false}
                                         format="h:mm A"
                                         use12Hours
-                                        className="form-control" />
+                                        className="form-control rc" />
                                 </div>
                                 </td>
                                 </tr>
@@ -214,7 +214,7 @@ const AddShiftComponent = () => {
                                     <input
                                         type="text"
                                         id="projectInput"
-                                        className="form-control"
+                                        className="form-control rc"
                                         value={proj}
                                         onChange={handleProjChange}
                                     />
@@ -222,7 +222,7 @@ const AddShiftComponent = () => {
                                     <input
                                         type="text"
                                         id="remarksInput"
-                                        className="form-control"
+                                        className="form-control rc"
                                         value={remarks}
                                         onChange={handleRemarksChange}
                                     />

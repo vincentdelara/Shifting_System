@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
 import Userservice from '../service/Userservice';
+import { Form, Button } from 'react-bootstrap';
 
 const RegistrationForm = () => {
   const [firstname, setFirstname] = useState('');
   const [lastname, setLastname] = useState('');
+  const [middlename, setMiddlename] = useState('');
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [business_unit, setBusiness_unit] = useState('');
   const [position, setPosition] = useState('');
-
- 
   const [error, setError] = useState('');
 
   const handleSubmit = async (e) => {
@@ -30,9 +30,20 @@ const RegistrationForm = () => {
         return;
       }
 
-      await Userservice.registerUser({ firstname, lastname, username, email, password, business_unit, position });
-      // Registration successful
+      await Userservice.registerUser({
+        firstname,
+        middlename,
+        lastname,
+        username,
+        email,
+        password,
+        business_unit,
+        position,
+      });
+
+      
       setFirstname('');
+      setMiddlename('');
       setLastname('');
       setUsername('');
       setEmail('');
@@ -40,7 +51,8 @@ const RegistrationForm = () => {
       setConfirmPassword('');
       setBusiness_unit('');
       setPosition('');
-      // Do something after successful registration
+
+    
     } catch (error) {
       setError('An error occurred');
     }
@@ -49,75 +61,113 @@ const RegistrationForm = () => {
   return (
     <form onSubmit={handleSubmit}>
       <div>
-        <label>firstname:</label>
-        <input
-          type="text"
-          value={firstname}
-          onChange={(e) => setFirstname(e.target.value)}
-        />
+      <div>
+        <Form.Group controlId="firstname" className="custom-control123">
+
+          <Form.Control
+            type="text"
+            value={firstname}
+            onChange={(e) => setFirstname(e.target.value)}
+            placeholder='First Name'
+          />
+        </Form.Group>
       </div>
       <div>
-        <label>lastname:</label>
-        <input
-          type="text"
-          value={lastname}
-          onChange={(e) => setLastname(e.target.value)}
-        />
+        <Form.Group controlId="middlename">
+
+          <Form.Control
+            type="text"
+            value={middlename}
+            onChange={(e) => setMiddlename(e.target.value)}
+            placeholder='Middle Name'
+          />
+        </Form.Group>
       </div>
       <div>
-        <label>username:</label>
-        <input
-          type="text"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-        />
-      </div>
-      <div>
-        <label>email:</label>
-        <input
-          type="text"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-      </div>
-      <div>
-        <label>Password:</label>
-        <input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-      </div>
-      <div>
-        <label>Password:</label>
-        <input
-          type="password"
-          value={confirmPassword}
-          onChange={(e) => setConfirmPassword(e.target.value)}
-        />
-      </div>
-      <div>
-        <label>business_unit:</label>
-        <input
-          type="text"
-          value={business_unit}
-          onChange={(e) => setBusiness_unit(e.target.value)}
-        />
-      </div>
-      <div>
-        <label>position:</label>
-        <input
-          type="text"
-          value={position}
-          onChange={(e) => setPosition(e.target.value)}
-        />
-      </div>
-      
+        <Form.Group controlId="lastname">
     
+          <Form.Control
+            type="text"
+            value={lastname}
+            onChange={(e) => setLastname(e.target.value)}
+            placeholder='Lastname'
+          />
+        </Form.Group>
+      </div>
       <div>
-        <button type="submit">Register</button>
+        <Form.Group controlId="Username">
+       
+          <Form.Control
+            type="text"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            placeholder='Username'
+          />
+        </Form.Group>
+      </div>
+      <div>
+        <Form.Group controlId="email">
+  
+          <Form.Control
+            type="text"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder='Email'
+          />
+        </Form.Group>
+      </div>
+      <div>
+        <Form.Group controlId="password">
+        
+          <Form.Control
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder='Password'
+          />
+        </Form.Group>
+      </div>
+      <div>
+        <Form.Group controlId="confirmPassword">
+         
+          <Form.Control
+            type="password"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+            placeholder='Confirm Password'
+          />
+        </Form.Group>
+      </div>
+      <div>
+        <Form.Group controlId="business_unit">
+          
+          <Form.Control
+            type="text"
+            value={business_unit}
+            onChange={(e) => setBusiness_unit(e.target.value)}
+            placeholder='Business Unit'
+          />
+        </Form.Group>
+      </div>
+      <div>
+        <Form.Group controlId="position">
+      
+          <Form.Control
+            type="text"
+            value={position}
+            onChange={(e) => setPosition(e.target.value)}
+            placeholder='Position'
+          />
+        </Form.Group>
+      </div>
+
+      <div>
+        <Button variant="primary" type="submit">
+          Register
+        </Button>
       </div>
       {error && <div>{error}</div>}
+      </div>
     </form>
   );
 };
