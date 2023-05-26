@@ -6,6 +6,7 @@ import HeaderComponent from "./component/HeaderComponent";
 import RequestComponent from "./component/RequestComponent";
 import LoginForm from "./component/LoginForm";
 import RegistrationForm from "./component/RegistrationForm";
+import BackgroundComponent from "./component/BackgroundComponent";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 
@@ -14,7 +15,8 @@ function App() {
   return (
     <BrowserRouter>
       <HeaderComponent/>
-      <div className="container">
+      <BackgroundComponent />
+    
       <Routes>
       <Route path="/login" element={< LoginForm/>} />
       <Route path="/" element={< LoginForm/>} />
@@ -25,7 +27,7 @@ function App() {
       <Route path="/add-shift/:id" element={< AddShiftComponent/>} />
       <Route path="/request/:id" element={< RequestComponent/>} />
       </Routes>
-      </div>
+     
       
 
     </BrowserRouter>

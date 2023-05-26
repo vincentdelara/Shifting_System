@@ -21,7 +21,7 @@ const HeaderComponent = () => {
   };
 
   return (
-    <Navbar bg="light" expand="lg">
+    <Navbar>
       <Navbar.Brand href="/"><img src="./assets/smol.png" alt="Tsukiden" className='navlogo'/></Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
@@ -40,6 +40,7 @@ const HeaderComponent = () => {
         </Nav>
       </Navbar.Collapse>
     </Navbar>
+
   );
 };
 

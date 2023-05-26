@@ -1,0 +1,255 @@
+.rowcolor{
+    color: #000000;
+    text-align: center;
+    background: linear-gradient(109.6deg, rgb(114, 201, 119) 11.2%, rgb(94, 235, 146) 91.1%);
+}
+
+
+
+.badge.custom-bg {
+    background-color: rgb(43, 187, 197);
+    color: white;
+  }
+
+
+  .wow{
+    display: flex;
+    justify-content: end; 
+    margin-top: 4%;
+    margin-bottom: .5%;
+    
+}
+
+.search-hover {
+    border: 1px solid #ccc;
+    outline: none;
+    background-size: 22px;
+    background-position: 13px;
+    border-radius: 100px;
+    width: 50px;
+    height: 50px;
+    padding: 25px;
+    transition: all 0.5s;
+    margin-top: 1.1%;
+    margin-right: .5%;
+    background-color: #008B00;
+  }
+
+  .btn.btn-primary.mb-2.mt-3.add{
+    width: 150px; 
+    margin-left: .5%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.button-text {
+    margin-top: 8px;
+     }
+
+     .search-container {
+        position: relative;
+        display: inline-block;
+        margin-top: 15px;
+        margin-right: .5%;
+      }
+
+      .search-hover {
+        border: 1px solid #ccc;
+        outline: none;
+        background-size: 22px;
+        background-position: 13px;
+        border-radius: 100px;
+        width: 50px;
+        height: 50px;
+        padding: 25px;
+        transition: all 0.5s;
+        margin-top: 1.1%;
+        margin-right: .5%;
+        background-color: #008B00;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        border: 1px solid #008b0000;
+      }
+
+      .search-hover:hover {
+        width: 300px;
+        padding-left: 50px;
+        background-color: #eaeaea; 
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      }
+      
+      .search-icon {
+        position: absolute;
+        top: 41%;
+        left: 11px;
+        transform: translateY(-50%);
+        width: 30px;
+        height: 30px;
+      }
+      
+      .search-container:hover .search-icon {
+        filter: grayscale(100%); 
+      }
+
+      .gilid{
+        text-align: left;
+        vertical-align: middle;
+    }
+    
+
+    .laman{
+        text-align: center;
+        vertical-align: middle;
+        background: linear-gradient(109.6deg, rgb(196, 210, 171) 11.2%, rgb(175, 228, 194) 91.1%);
+    }
+    
+    .updel{
+        display: flex;
+        justify-content: center; 
+    }
+
+    .btn.btn-info.req{
+        --bs-btn-color: #ffffff;
+        --bs-btn-bg: #008b00;
+        --bs-btn-border-color: #008B00;
+        --bs-btn-hover-color: #fff;
+        --bs-btn-hover-bg: #015701;
+        --bs-btn-hover-border-color: #015701;
+        --bs-btn-focus-shadow-rgb: 49,132,253;
+        --bs-btn-active-color: #fff;
+        --bs-btn-active-bg: #063f06;
+        --bs-btn-active-border-color: #063f06;
+        --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+        --bs-btn-disabled-color: #fff;
+        --bs-btn-disabled-bg: #063f06;
+        --bs-btn-disabled-border-color: #063f06;
+        border-radius: 100px;
+        margin-right: 5px;
+}
+
+.btn.btn-info.edit{
+    --bs-btn-color: #ffffff;
+    --bs-btn-bg: #009bb0;
+    --bs-btn-border-color: #009bb0;
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-bg: #025560;
+    --bs-btn-hover-border-color: #025560;
+    --bs-btn-focus-shadow-rgb: 49,132,253;
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-bg: #009bb0;
+    --bs-btn-active-border-color: #009bb0;
+    --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+    --bs-btn-disabled-color: #fff;
+    --bs-btn-disabled-bg: #242424;
+    --bs-btn-disabled-border-color: #242424;
+    border-radius: 100px;
+    margin-right: 5px;
+}
+
+.btn.btn-danger.list{
+    --bs-btn-color: #ffffff;
+    --bs-btn-bg: #862e2e;
+    --bs-btn-border-color: #862e2e;
+    --bs-btn-hover-color: #632121;
+    --bs-btn-hover-bg: #862e2e;
+    --bs-btn-hover-border-color: #4c4c4c;
+    --bs-btn-focus-shadow-rgb: 49,132,253;
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-bg: #3b3b3b;
+    --bs-btn-active-border-color: #3b3b3b;
+    --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+    --bs-btn-disabled-color: #fff;
+    --bs-btn-disabled-bg: #3b3b3b;
+    --bs-btn-disabled-border-color: #3b3b3b;
+    border-radius: 100px;
+    margin-right: 5px;
+}
+
+
+
+.table01 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+  }
+  
+  .table.table-bordered.table.striped.table.table-hover {
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Adjust the shadow properties as needed */
+  }
+  
+  
+  .table.table-bordered.table.striped.table.table-hover thead th:first-child {
+    border-top-left-radius: 10px;
+  }
+  
+  .table.table-bordered.table.striped.table.table-hover thead th:last-child {
+    border-top-right-radius: 10px;
+  }
+  
+  .table.table-bordered.table.striped.table.table-hover tbody tr:last-child td:first-child {
+    border-bottom-left-radius: 10px;
+  }
+  
+  .table.table-bordered.table.striped.table.table-hover tbody tr:last-child td:last-child {
+    border-bottom-right-radius: 10px;
+  }
+
+.table.table-bordered.table.striped.table.table-hover th,
+.table.table-bordered.table.striped.table.table-hover td {
+  border: 1px solid rgba(121, 255, 4, 0); 
+  padding: 8px;
+}
+
+  
+
+.btn.btn-primary.mb-2.mt-3.fill {
+  position: relative;
+  border: 1px solid #ccc;
+  outline: none;
+  background-size: 22px;
+  background-position: 13px;
+  border-radius: 100px;
+  width: 50px;
+  height: 50px;
+  padding: 25px;
+  transition: all 0.5s;
+  text-align: center;
+  overflow: hidden; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #008b0000;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.btn.btn-primary.mb-2.mt-3.fill:hover {
+  width: 150px;
+  padding-left: 30px;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.filter-icon {
+  position: absolute;
+  top: 50%;
+  left: 25px; 
+  transform: translate(-50%, -50%);
+  width: 20px;
+  height: 20px;
+}
+
+.btn.btn-primary.mb-2.mt-3.fill:hover .filtext {
+  display: inline; 
+}
+
+.filtext {
+  display: none;
+}
+
+.text-success .form-check-input:checked {
+  background-color: #015701;
+  border-color: #015701;
+}

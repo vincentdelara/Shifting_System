@@ -25,13 +25,14 @@ const RequestComponent = () => {
 
     function saveData(e) {
         e.preventDefault();
-
+    
         if (reqdate !== '') {
             const updatedShiftData = {
                 ...data,
-                reqday: reqdate
+                reqday: reqdate,
+                status: 'Pending' // Add status field with the value "Pending"
             };
-
+    
             Shiftservice.updateData(id, updatedShiftData)
                 .then(() => navigate("/shifts"))
                 .catch((e) => console.log(e));
@@ -39,6 +40,7 @@ const RequestComponent = () => {
             setDateError("Please select a date");
         }
     }
+    
 
     function formatDate(date) {
         const formattedDate = new Date(date);

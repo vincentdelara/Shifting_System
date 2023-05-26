@@ -7,7 +7,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import TimePicker from 'rc-time-picker';
 import 'rc-time-picker/assets/index.css';
 import moment from 'moment';
-import './line.css';
+
 
 const AddShiftComponent = () => {
     const [overtime, setovertime] = useState(new Date());
@@ -19,14 +19,16 @@ const AddShiftComponent = () => {
     const [status, setstatus] = useState('Unused');
     const [proj, setproj] = useState('');
     const [remarks, setremarks] = useState('');
-    const [username, setUsername] = useState('');    
+    const [username, setUsername] = useState('');
+    const [formError, setformError] = useState('');
+    const [timeError, settimeError] = useState('');
     const navigate = useNavigate();
     const { id } = useParams();
 
     const shiftData = { overtime, otime, start, end, xpire, shifttype, status, proj, remarks, username };
 
     useEffect(() => {
-        const storedUsername = localStorage.getItem('loggedInUser');
+        const storedUsername = localStorage.getItem('loggedInUser');// store logged in user
         if (storedUsername) {
             setUsername(storedUsername);
         }
@@ -49,12 +51,10 @@ const AddShiftComponent = () => {
     };
 
 
-    const Line = () => {
-        return <div className="line"></div>;
-    };
+
 
     function saveData(e) {
-        e.preventDefault();
+        e.preventDefault();     // add shifts
 
         if (
             shiftData.overtime !== "" &&
@@ -63,13 +63,13 @@ const AddShiftComponent = () => {
             shiftData.end !== "" &&
             shiftData.xpire !== "" &&
             shiftData.proj !== "" &&
-            shiftData.remarks !== "" 
+            shiftData.remarks !== ""
         ) {
             const start = new Date(shiftData.start);
             const end = new Date(shiftData.end);
 
             // Add 24 hours to end time if it's before start time
-            if (end.getTime() < start.getTime()) {
+            if (end.getTime() < start.getTime()) {  // logic for time picker
                 end.setDate(end.getDate() + 1);
             }
 
@@ -77,7 +77,7 @@ const AddShiftComponent = () => {
 
             // Set shifttype based on shift duration
             if (shiftDuration < 4) {
-                alert("Shift hours must be at least 4 hours!");
+                settimeError("Shift hours must be at least 4 hours!");
                 return;
             } else if (shiftDuration < 8) {
                 shiftData.shifttype = "4 Hours Shifting";
@@ -86,9 +86,9 @@ const AddShiftComponent = () => {
             }
 
 
-           
 
-              
+
+
             // Format start and end times
             const formattedStart = start.toLocaleTimeString("en-US", {
                 hour12: false,
@@ -107,6 +107,7 @@ const AddShiftComponent = () => {
             shiftData.start = formattedStart;
             shiftData.end = formattedEnd;
 
+            // update shifts
             if (id) {
                 Shiftservice.updateData(id, shiftData)
                     .then(navigate("/shifts"))
@@ -117,11 +118,11 @@ const AddShiftComponent = () => {
                     .catch((e) => console.log(e));
             }
         } else {
-            alert("Please, fill in all inputs");
+            setformError("Please, fill in all inputs");
         }
     }
 
-
+    // header tiles
     function tile() {
         if (id) {
             return "Update Shifting Record";
@@ -130,28 +131,30 @@ const AddShiftComponent = () => {
         }
     }
 
+    //retrive datas for update shift
     useEffect(() => {
         if (id) {
-          Shiftservice.getDataById(id)
-            .then(res => {
-              setovertime(new Date(res.data.overtime));
-              setotime(new Date(res.data.otime));
-              setstart(moment(`2000-01-01T${res.data.start}`)); // Convert to moment object
-              setend(moment(`2000-01-01T${res.data.end}`)); // Convert to moment object
-              setxpire(res.data.xpire);
-              setshifttype(res.data.shifttype);
-              setstatus(res.data.status);
-              setproj(res.data.proj);
-              setremarks(res.data.remarks);
-            })
-            .catch(e => console.log(e));
+            Shiftservice.getDataById(id)
+                .then(res => {
+                    setovertime(new Date(res.data.overtime));
+                    setotime(new Date(res.data.otime));
+                    setstart(moment(`2000-01-01T${res.data.start}`));
+                    setend(moment(`2000-01-01T${res.data.end}`));
+                    setxpire(res.data.xpire);
+                    setshifttype(res.data.shifttype);
+                    setstatus(res.data.status);
+                    setproj(res.data.proj);
+                    setremarks(res.data.remarks);
+                })
+                .catch(e => console.log(e));
         } else {
-          if (overtime && otime) {
-            const lastDayOfYear = new Date(overtime.getFullYear(), 11, 31);
-            setxpire(lastDayOfYear.toLocaleDateString('en-CA').split('/').reverse().join('-'));
-          }
+            if (overtime && otime) {
+                const lastDayOfYear = new Date(overtime.getFullYear(), 11, 31);
+                setxpire(lastDayOfYear.toLocaleDateString('en-CA').split('/').reverse().join('-'));
+            }
         }
-      }, [id]);
+    }, [id]);
+
 
     return (
         <div>
@@ -166,55 +169,55 @@ const AddShiftComponent = () => {
                             <form>
                                 <table className="table table-centered table-spacing">
                                     <tr>
-                                        
+
                                         <td className='td1'>
-                                            
                                             <div className="form-control outline" >
-                                    <label>Start Date</label>
-                                    <DatePicker
-                                        selected={overtime}
-                                        onChange={handleDateChange}
-                                        dateFormat="MMMM d, yyyy"
-                                        className="form-control rc"
-                                        maxDate={new Date(new Date().setDate(new Date().getDate() - 1))}
-                                    />
-                                    <label>End Date</label>
-                                    <DatePicker
-                                        selected={otime}
-                                        onChange={handleDateChange2}
-                                        dateFormat="MMMM d, yyyy"
-                                        className="form-control rc"
-                                        maxDate={new Date(new Date().setDate(new Date().getDate() - 1))}/>
-                                </div></td>
-                                
-                                <td className='td2'>
-                                <div className="form-control outline">
-                                <label>Start Time</label>
-                                    <TimePicker
-                                        value={start}
-                                        onChange={setstart}
-                                        showSecond={false}
-                                        format="h:mm A"
-                                        use12Hours
-                                        className="form-control rc"/>
-                                    <label>End Time</label>
-                                    <TimePicker
-                                        value={end}
-                                        onChange={setend}
-                                        showSecond={false}
-                                        format="h:mm A"
-                                        use12Hours
-                                        className="form-control rc" />
-                                </div>
-                                </td>
-                                </tr>
+                                                <label>Start Date</label>
+                                                <DatePicker
+                                                    selected={overtime}
+                                                    onChange={handleDateChange}
+                                                    dateFormat="MMMM d, yyyy"
+                                                    className= 'form-control rc' 
+                                                    maxDate={new Date(new Date().setDate(new Date().getDate() - 1))}
+                                                />
+                                                <label>End Date</label>
+                                                <DatePicker
+                                                    selected={otime}
+                                                    onChange={handleDateChange2}
+                                                    dateFormat="MMMM d, yyyy"
+                                                    className= 'form-control rc' 
+                                                    maxDate={new Date(new Date().setDate(new Date().getDate() - 1))} />
+                                            </div></td>
+
+                                        <td className='td2'>
+                                            <div className="form-control outline">
+                                                <label>Start Time</label>
+                                                <TimePicker
+                                                    value={start}
+                                                    onChange={setstart}
+                                                    showSecond={false}
+                                                    format="h:mm A"
+                                                    use12Hours
+                                                    className={`form-control rc ${timeError ? 'is-invalid' : ''}`} />
+                                                <label>End Time</label>
+                                                <TimePicker
+                                                    value={end}
+                                                    onChange={setend}
+                                                    showSecond={false}
+                                                    format="h:mm A"
+                                                    use12Hours
+                                                    className={`form-control rc ${timeError ? 'is-invalid' : ''}`} />
+                                            </div>
+                                            
+                                        </td>
+                                    </tr>
                                 </table>
                                 <div className="form-control outline">
                                     <label >Project</label>
                                     <input
                                         type="text"
                                         id="projectInput"
-                                        className="form-control rc"
+                                        className={`form-control rc ${formError ? 'is-invalid' : ''}`}
                                         value={proj}
                                         onChange={handleProjChange}
                                     />
@@ -222,15 +225,17 @@ const AddShiftComponent = () => {
                                     <input
                                         type="text"
                                         id="remarksInput"
-                                        className="form-control rc"
+                                        className={`form-control rc ${formError ? 'is-invalid' : ''}`}
                                         value={remarks}
                                         onChange={handleRemarksChange}
                                     />
                                 </div>
+                                {formError && <div className="text-danger">{formError}</div>}
+                                {timeError && <div className="text-danger">{timeError}</div>}
                                 <div className='submitcancel'>
-                                
-                                <Link to='/shifts' className='btn btn-danger ml-2'>Cancel</Link>
-                                <button className='btn btn-success' onClick={saveData}>Submit</button>
+
+                                    <Link to='/shifts' className='btn btn-danger ml-2'>Cancel</Link>
+                                    <button className='btn btn-success' onClick={saveData}>Submit</button>
                                 </div>
                             </form>
                         </div>
