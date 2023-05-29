@@ -104,27 +104,6 @@
 
   /* Header ################################################### */
 
-.navbar{
-  background: linear-gradient(109.6deg, rgb(217, 250, 158) 11.2%, rgb(128, 251, 174) 91.1%);
-  height: 90px;
-  display: flex;
-    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
-}
-
-.navlogo {
-    width: 80%;
-    height: auto;
-    vertical-align: middle;
-    margin-left: 3.5%;
-}
-
-
-.navbar.navbar-expand-md.loob{
-  background: linear-gradient(to right, #C5E8B7, #008B00);
-  height: 70px;
-  display: flex;
-  width: 100%;
-}
 /* Header ################################################### */
 
 .text-center{
@@ -349,120 +328,25 @@ padding-left: 3%;
     text-align: center;
   }
 
+
+  .tooltip {
+    visibility: hidden;
+    position: absolute;
+    z-index: 1;
+    background-color: #000;
+    color: #fff;
+    padding: 5px;
+    border-radius: 3px;
+    font-size: 12px;
+  }
+  
+  button:disabled .tooltip {
+    visibility: visible;
+  }
+
+  
   /* MODAL ################################################### */
 
-
-   /* MODAL2 ################################################### */
-  .modal-dialog2 {
-    max-width: 45%;
-    margin: 100px auto;
-    background-color: #ddfbdd;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  }
-
-
-  .modal-body2 {
-   padding-left: 15%;
-   padding-top: 5%;
-    background-color: #ddfbdd;
-  }
-
-  .modal.req{
-    padding-top: 0%;
-  }
-
-  .col{
-   margin-left: -7%;
-  
-  }
-
-  .rd.ttl{
-    margin-bottom: 5%;
-    margin-right: 2%;
-
-  }
-
-
-
-
-.mt-3.d-flex.align-items-center{
-padding-top: 3%;
-width: 50%;
-margin-left: 15%;
-}
-
-.btn.btn-primary.ml-2.cancel{
-  --bs-btn-color: #fff;
-  --bs-btn-bg: #6b6b6b;
-  --bs-btn-border-color: #6b6b6b;
-  --bs-btn-hover-color: #fff;
-  --bs-btn-hover-bg: #575757;
-  --bs-btn-hover-border-color: #575757;
-  --bs-btn-focus-shadow-rgb: 49,132,253;
-  --bs-btn-active-color: #fff;
-  --bs-btn-active-bg: #3e3e3e;
-  --bs-btn-active-border-color: #3e3e3e;
-  --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
-  --bs-btn-disabled-color: #fff;
-  --bs-btn-disabled-bg: #898D8E;
-  --bs-btn-disabled-border-color: #898D8E;
-  border-radius: 100px;
-  margin-right: 5px;
-}
-
-.btn.btn-primary.ml-2.submit{
-  --bs-btn-color: #fff;
-    --bs-btn-bg: #008B00;
-    --bs-btn-border-color: #008B00;
-    --bs-btn-hover-color: #fff;
-    --bs-btn-hover-bg: #015701;
-    --bs-btn-hover-border-color: #015701;
-    --bs-btn-focus-shadow-rgb: 49,132,253;
-    --bs-btn-active-color: #fff;
-    --bs-btn-active-bg: #063f06;
-    --bs-btn-active-border-color: #063f06;
-    --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
-    --bs-btn-disabled-color: #fff;
-    --bs-btn-disabled-bg: #063f06;
-    --bs-btn-disabled-border-color: #063f06;
-    border-radius: 100px;
-}
-
-
-.selected {
-  text-align: left;
-  padding: 20px;
-}
-
-
-
-.selected p {
-  margin: 0;
-}
-
-.subcel{
-  display: flex;
-  justify-content: end; 
-  padding-top: 2.5%;
-  padding-bottom: 2.5%;
-  padding-right: 2.5%;
-  background-color: #ddfbdd;
-}
-
-
- /* MODAL2 ################################################### */
-
-
-  /* create acc ################################################### */
- 
-
-  .custom-control123{
-    border-radius: 100rem; /* Adjust this value for desired curvature */
-  }
-  
-  /* create acc ################################################### */
- 
 
   .form-control.rc{
     border-radius: 50rem;

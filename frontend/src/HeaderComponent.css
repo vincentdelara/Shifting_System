@@ -1,0 +1,33 @@
+
+.navbar{
+    background: linear-gradient(109.6deg, rgb(217, 250, 158) 11.2%, rgb(128, 251, 174) 91.1%);
+    height: 90px;
+    display: flex;
+      box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .navlogo {
+      width: 80%;
+      height: auto;
+      vertical-align: middle;
+      margin-left: 3.5%;
+  }
+  
+  
+  .navbar.navbar-expand-md.loob{
+    background: linear-gradient(to right, #C5E8B7, #008B00);
+    height: 70px;
+    display: flex;
+    width: 100%;
+  }
+
+  .navbar-collapse.collapse{
+    display: flex;
+    justify-content: end; 
+    margin-right: 2%;
+  }
+
+  .logout{
+    height: auto;
+    width: 20px;
+  }

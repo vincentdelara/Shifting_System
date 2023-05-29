@@ -24,11 +24,14 @@
 .form-control.login {
     height: 50px;
     border-radius: 15px; 
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   }
 
   .title{
     color: #008b00;
     font-weight: bold;
+  
+
   }
 
   .btn.btn-primary{
@@ -66,13 +69,13 @@
 
  .rememberforgot{
   display: flex;
-  align-items: center;
-  justify-content: center;
+    justify-content: start; 
+    padding-left: 3%;
  }
 
  .form-check.remember-me{
   padding-top: .5%;
-padding-right: 42%;
+
 color: #008b00;
  }
 
@@ -96,7 +99,7 @@ color: #008b00;
 }
 
 .form-check.remember-me .form-check-input{
-  background-color: #ffffff00;
+  background-color: #ffffff3e;
 }
 
 
@@ -121,3 +124,4 @@ color: #008b00;
 .create-account{
   font-size: smaller;
 }
+

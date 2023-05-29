@@ -4,7 +4,11 @@ import Shiftservice from '../service/Shiftservice';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import "../ListShiftComponent.css"; 
+import "../modal2request.css"; 
 import { Form } from 'react-bootstrap';
+import Box from '@mui/material/Box';
+import Tooltip from '@mui/material/Tooltip';
+
 
 
 
@@ -274,6 +278,8 @@ const ListShiftComponent = () => {
                   )}
 
                   {data.shifttype === '4 Hours Shifting' && (//show button if 4 hours shift
+                  <Tooltip title="You don't have permission to do this" followCursor>
+                     <Box>
                     <button
                       className='btn btn-info req'
                       onClick={handleModalOpen2}
@@ -281,7 +287,8 @@ const ListShiftComponent = () => {
                     >
                       Add req day
                     </button>
-
+                    </Box>
+                    </Tooltip>
                   )}
 
                   <Link
@@ -372,8 +379,8 @@ const ListShiftComponent = () => {
                 </form>
               </div>
               <div className="modal-footer">
-                <button type="button" className="btn btn-secondary" onClick={clearFilters}>Clear Filters</button>
-                <button type="button" className="btn btn-primary" onClick={handleModalClose}>Done</button>
+                <button type="button" className="btn btn-info cancel" onClick={clearFilters}>Clear Filters</button>
+                <button type="button" className="btn btn-info submit" onClick={handleModalClose}>Done</button>
               </div>
             </div>
           </div>
@@ -427,10 +434,10 @@ const ListShiftComponent = () => {
               </div>
 
               <div className="subcel">
-                <button className="btn btn-primary ml-2 cancel" onClick={handleModalClose2}>
+                <button className='btn btn-info cancel' onClick={handleModalClose2}>
                   Cancel
                 </button>
-                <button className="btn btn-primary ml-2 submit" onClick={addLeaveDate}>
+                <button className="btn btn-info submit" onClick={addLeaveDate}>
                   Submit
                 </button>
               </div>

@@ -1,5 +1,7 @@
 //vincentdelara
 
+import React from "react";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import AddShiftComponent from "./component/AddShiftComponent";
 import ListShiftComponent from "./component/ListShiftComponent";
 import HeaderComponent from "./component/HeaderComponent";
@@ -7,33 +9,57 @@ import RequestComponent from "./component/RequestComponent";
 import LoginForm from "./component/LoginForm";
 import RegistrationForm from "./component/RegistrationForm";
 import BackgroundComponent from "./component/BackgroundComponent";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-
-
 
 function App() {
+  // Check if user is logged in by looking for a stored value in local storage
+  const isLoggedIn = !!localStorage.getItem("loggedInUser");
+
+  // Define a custom route component to handle restricted routes
+  const RestrictedRoute = ({ path, element }) => {
+    if (isLoggedIn) {
+      return element;
+    } else {
+      return <Navigate to="/login" />;
+    }
+  };
+
   return (
     <BrowserRouter>
-      <HeaderComponent/>
+      <HeaderComponent />
       <BackgroundComponent />
-    
-      <Routes>
-      <Route path="/login" element={< LoginForm/>} />
-      <Route path="/" element={< LoginForm/>} />
-      <Route path="/register" element={< RegistrationForm/>} />
-      <Route path="/list" element={< ListShiftComponent/>} />
-      <Route path="/shifts" element={< ListShiftComponent/>} />
-      <Route path="/add-shift" element={< AddShiftComponent/>} />
-      <Route path="/add-shift/:id" element={< AddShiftComponent/>} />
-      <Route path="/request/:id" element={< RequestComponent/>} />
-      </Routes>
-     
-      
 
+      <Routes>
+        <Route path="/login" element={<LoginForm />} />
+        <Route path="/register" element={<RegistrationForm />} />
+        <Route
+          path="/list"
+          element={<RestrictedRoute element={<ListShiftComponent />} />}
+        />
+        <Route
+          path="/shifts"
+          element={<RestrictedRoute element={<ListShiftComponent />} />}
+        />
+        <Route
+          path="/add-shift"
+          element={<RestrictedRoute element={<AddShiftComponent />} />}
+        />
+        <Route
+          path="/add-shift/:id"
+          element={<RestrictedRoute element={<AddShiftComponent />} />}
+        />
+        <Route
+          path="/request/:id"
+          element={<RestrictedRoute element={<RequestComponent />} />}
+        />
+        <Route
+          path="/"
+          element={
+            isLoggedIn ? <Navigate to="/list" /> : <LoginForm />
+          }
+        />
+      </Routes>
     </BrowserRouter>
   );
 }
 
-
-
-export default App; 
+export default App;
