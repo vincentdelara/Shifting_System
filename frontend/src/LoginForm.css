@@ -1,0 +1,123 @@
+.container123{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+  
+.loglog{
+    width: 500px; 
+    margin-top: 19%;
+    margin-bottom: 19%;
+    
+}
+
+.mb-3{
+    width: 500px;  
+}
+
+#formBasicPassword{
+  margin-bottom: -13px; 
+}
+
+.form-control.login {
+    height: 50px;
+    border-radius: 15px; 
+  }
+
+  .title{
+    color: #008b00;
+    font-weight: bold;
+  }
+
+  .btn.btn-primary{
+    --bs-btn-color: #fff;
+    --bs-btn-bg: #008b00;
+    --bs-btn-border-color: #008b00;
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-bg: #01a301;
+    --bs-btn-hover-border-color: #04b104;
+    --bs-btn-focus-shadow-rgb: 49,132,253;
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-bg: #008b00;
+    --bs-btn-active-border-color: #008b00;
+    --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+    --bs-btn-disabled-color: #fff;
+    --bs-btn-disabled-bg: #025302;
+    --bs-btn-disabled-border-color: #035a03;
+    width: 300px;
+    height: 50px;
+    border-radius: 15px; 
+  }
+
+ .logbutton{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 12%;
+ }
+
+ .error{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+ }
+
+ .rememberforgot{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+ }
+
+ .form-check.remember-me{
+  padding-top: .5%;
+padding-right: 42%;
+color: #008b00;
+ }
+
+ .forgot-password{
+  color: #008b00;
+ }
+
+ .forgot-password:hover {
+  color: #086a08;
+}
+
+
+
+ .form-check-label{
+  font-weight: initial;
+ } 
+
+.form-check.remember-me .form-check-input:checked {
+  background-color: #015701;
+  border-color: #015701;
+}
+
+.form-check.remember-me .form-check-input{
+  background-color: #ffffff00;
+}
+
+
+.create-account{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.create-account123{
+  color: #008b00;
+  font-weight: bold;
+  margin-left: 1%;
+ }
+
+ .create-account123:hover {
+  color: #086a08;
+}
+
+
+.create-account{
+  font-size: smaller;
+}
