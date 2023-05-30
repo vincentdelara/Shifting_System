@@ -1,7 +1,6 @@
-//vincentdelara
 import axios from 'axios';
 
-const BASE_URL = 'http://localhost:8090';
+const BASE_URL = 'http://localhost:8090'; // Replace with your actual API base URL
 
 class UserService {
   getUserById(userId) {
@@ -18,8 +17,14 @@ class UserService {
       .catch(error => null);
   }
 
+  getUserByEmail(email) {
+    return axios.get(`${BASE_URL}/email/${email}`)
+      .then(response => response.data)
+      .catch(error => null);
+  }
+
   registerUser(user) {
-    return axios.post(`${BASE_URL}/registerUser`, user);
+    return axios.post(`${BASE_URL}/register`, user);
   }
 }
 

@@ -5,22 +5,27 @@
     justify-content: center;
     color: #118411;
     margin-top: 5%;
+
   }
   
  
-
+#firstname{
+    margin-top: 1%;
+}
 .form-control.reg{
     width: 500px;
     height: 50px;
     border-radius: 15PX;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    margin-bottom: -20px;
+    margin-top: 40px;    
 }
+
 
 .custom-control.reg{
     display: flex;
     align-items: center;
     justify-content: center;
-    
 }
 
 
@@ -51,6 +56,7 @@
     --bs-btn-disabled-bg: #898D8E;
     --bs-btn-disabled-border-color: #898D8E;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    margin-top: 40px; 
 }
 
 .but.ca{
@@ -95,4 +101,22 @@
   
 .dropmenu{
     width: 100%;
+}
+
+.erroror{
+    margin-top: 20px;
+    color: rgb(127, 50, 50);
+    margin-left: 20px;
+    margin-bottom: -8.4%;
+    font-weight: 400;
+}
+
+
+.err{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgb(133, 36, 36);
+    font-weight: bold;
+    
 }

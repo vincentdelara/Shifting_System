@@ -30,8 +30,15 @@ public class UserController {
         return userMapper.getUserByUsername(username);
     }
 
+    @GetMapping("/email/{email}")
+public User getUserByEmail(@PathVariable String email) {
+  return userMapper.getUserByEmail(email);
+}
 
-    @PostMapping("/registerUser")
+
+
+
+    @PostMapping("/register")
     public void registerUser(@RequestBody User user) {
         userMapper.createUser(user);
     }

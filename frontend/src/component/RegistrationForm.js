@@ -15,14 +15,63 @@ const RegistrationForm = () => {
   const [business_unit, setBusiness_unit] = useState('');
   const [position, setPosition] = useState('');
   const [error, setError] = useState('');
+  const [ErrorUsername, setErrorUsername] = useState('');
+  const [passerror, setpasserror] = useState('');
+  const [emailerr, setemailerr] = useState('');
+
   const [termsChecked, setTermsChecked] = useState(false);
   const [showTermsModal, setShowTermsModal] = useState(false);
+
+  const [firstnameError, setFirstnameError] = useState(false);
+const [lastnameError, setLastnameError] = useState(false);
+const [middlenameError, setMiddlenameError] = useState(false);
+const [usernameError, setUsernameError] = useState(false);
+const [emailError, setEmailError] = useState(false);
+const [passwordError, setPasswordError] = useState(false);
+const [businessUnitError, setBusinessUnitError] = useState(false);
+const [positionError, setPositionError] = useState(false);
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (password !== confirmPassword) {
-      setError('Passwords do not match');
+      setpasserror('Passwords do not match');
+      setTimeout(() => setpasserror(''), 5000);
+      return;
+    }
+
+    if (
+      !firstname ||
+      !lastname ||
+      !middlename ||
+      !username ||
+      !email ||
+      !password ||
+      !business_unit ||
+      !position
+    ) {
+      setError('Please fill in all required fields');
+      setTimeout(() => setError(''), 5000);
+
+      setFirstnameError(!firstname);
+      setLastnameError(!lastname);
+      setMiddlenameError(!middlename);
+      setUsernameError(!username);
+      setEmailError(!email);
+      setPasswordError(!password);
+      setBusinessUnitError(!business_unit);
+      setPositionError(!position);
+      setTimeout(() => setFirstnameError(''), 5000);
+      setTimeout(() => setLastnameError(''), 5000);
+      setTimeout(() => setMiddlenameError(''), 5000);
+      setTimeout(() => setUsernameError(''), 5000);
+      setTimeout(() => setEmailError(''), 5000);
+      setTimeout(() => setPasswordError(''), 5000);
+      setTimeout(() => setBusinessUnitError(''), 5000);
+      setTimeout(() => setPositionError(''), 5000);
+
+
       return;
     }
 
@@ -30,7 +79,16 @@ const RegistrationForm = () => {
       // Check if the username already exists
       const existingUser = await Userservice.getUserByUsernamereg(username);
       if (existingUser) {
-        setError('Username already exists. Please choose a different username.');
+        setErrorUsername('Username already exists. Please choose a different username.');
+        setTimeout(() => setErrorUsername(''), 5000);
+        return;
+      }
+
+      // Check if the email already exists
+      const existingEmail = await Userservice.getUserByEmail(email);
+      if (existingEmail) {
+        setemailerr('Email already exists. Please choose a different email.');
+        setTimeout(() => setemailerr(''), 5000);
         return;
       }
 
@@ -56,6 +114,7 @@ const RegistrationForm = () => {
       setPosition('');
     } catch (error) {
       setError('An error occurred');
+      setTimeout(() => setError(''), 5000);
     }
   };
 
@@ -86,7 +145,7 @@ const RegistrationForm = () => {
               value={firstname}
               onChange={(e) => setFirstname(e.target.value)}
               placeholder="First Name"
-              className="form-control reg"
+              className={`form-control reg ${firstnameError ? 'is-invalid' : ''}`}
             />
           </Form.Group>
         </div>
@@ -100,7 +159,7 @@ const RegistrationForm = () => {
                     value={middlename}
                     onChange={(e) => setMiddlename(e.target.value)}
                     placeholder="Middle Name"
-                    className="form-control reg mid"
+                    className={`form-control reg mid ${middlenameError ? 'is-invalid' : ''}`}
                   />
                 </Form.Group>
               </div>
@@ -113,23 +172,25 @@ const RegistrationForm = () => {
                     value={lastname}
                     onChange={(e) => setLastname(e.target.value)}
                     placeholder="Lastname"
-                    className="form-control reg mid"
+                    className={`form-control reg mid ${lastnameError ? 'is-invalid' : ''}`}
                   />
                 </Form.Group>
               </div>
             </Col>
           </Row>
         </Form>
-        <div>
+        <div >
+        
           <Form.Group controlId="Username">
             <Form.Control
               type="text"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               placeholder="Username"
-              className="form-control reg"
+              className={`form-control reg ${ErrorUsername ? 'is-invalid' : ''} ${usernameError ? 'is-invalid' : ''}`}
             />
           </Form.Group>
+          {ErrorUsername && <div className='erroror'>{ErrorUsername}</div>}
         </div>
         <div>
           <Form.Group controlId="email">
@@ -138,9 +199,10 @@ const RegistrationForm = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Email"
-              className="form-control reg"
+              className={`form-control reg ${emailerr ? 'is-invalid' : ''} ${emailError ? 'is-invalid' : ''}`}
             />
           </Form.Group>
+          {emailerr && <div className='erroror'>{emailerr}</div>}
         </div>
         <div>
           <Form.Group controlId="password">
@@ -149,7 +211,7 @@ const RegistrationForm = () => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Password"
-              className="form-control reg"
+              className={`form-control reg ${passerror ? 'is-invalid' : ''} ${passwordError ? 'is-invalid' : ''}`}
             />
           </Form.Group>
         </div>
@@ -160,9 +222,11 @@ const RegistrationForm = () => {
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
               placeholder="Confirm Password"
-              className="form-control reg"
+              className={`form-control reg ${passerror ? 'is-invalid' : ''} ${passwordError ? 'is-invalid' : ''}`}
             />
           </Form.Group>
+          {passerror && <div className='erroror'>{passerror}</div>}
+          
         </div>
         <div>
           <Form>
@@ -174,7 +238,7 @@ const RegistrationForm = () => {
                       Business Unit
                     </Dropdown.Toggle>
 
-                    <Dropdown.Menu className='dropmenu'>
+                    <Dropdown.Menu className= {`dropmenu ${businessUnitError ? 'is-invalid' : ''}`}>
                       <Dropdown.Item onClick={() => setBusiness_unit('')}>Select Business Unit</Dropdown.Item>
                       <Dropdown.Item onClick={() => setBusiness_unit('Developver')}>Developver</Dropdown.Item>
                       <Dropdown.Item onClick={() => setBusiness_unit('QA')}>QA</Dropdown.Item>
@@ -201,6 +265,7 @@ const RegistrationForm = () => {
               </Col>
             </Row>
           </Form>
+          
         </div>
 
         <div className='but tp'>
@@ -247,8 +312,12 @@ const RegistrationForm = () => {
             Sign in now
           </a>
         </div>
+        <div >{error && <div className='err'>{error}</div>}</div>
 
-        {error && <div>{error}</div>}
+        
+        
+       
+        
       </div>
     </form>
     </div>

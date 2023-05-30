@@ -125,3 +125,10 @@ color: #008b00;
   font-size: smaller;
 }
 
+
+.error-red {
+  color: rgb(157, 8, 8);
+  display: flex;
+  justify-content: start; 
+margin-left: 2%;
+}

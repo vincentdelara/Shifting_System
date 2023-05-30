@@ -253,3 +253,8 @@
   background-color: #015701;
   border-color: #015701;
 }
+
+.MuiTooltip-popper.css-179vq5o-MuiPopper-root-MuiTooltip-popper.MuiPopper-root{
+ text-align: center;
+ width: 150px;
+}

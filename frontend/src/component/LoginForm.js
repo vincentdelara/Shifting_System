@@ -10,9 +10,6 @@ const LoginForm = () => {
   const [error, setError] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
 
-
-  
-  
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -33,10 +30,6 @@ const LoginForm = () => {
     }
   };
 
-  
-
- 
-
   const handleCreateAccount = () => {
     window.location.href = '/register';
   };
@@ -47,14 +40,14 @@ const LoginForm = () => {
         <img src="./assets/tsukiden.png" alt="Tsukiden" className="loglog" />
       </div>
       <form onSubmit={handleSubmit}>
-      <h2 id="title" className="title">Welcome!</h2>
+        <h2 id="title" className="title">Welcome!</h2>
         <div>
           <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Control
               type="text"
               value={username}
               className={`form-control login ${error ? 'is-invalid' : ''}`}
-              placeholder={error ? error : 'Username'}
+              placeholder='Username'
               onChange={(e) => setUsername(e.target.value)}
             />
           </Form.Group>
@@ -65,13 +58,12 @@ const LoginForm = () => {
               type="password"
               value={password}
               className={`form-control login ${error ? 'is-invalid' : ''}`}
-              placeholder={error ? error : 'Password'}
+              placeholder='Password'
               onChange={(e) => setPassword(e.target.value)}
             />
           </Form.Group>
-
         </div>
-       
+        <div className={`error ${error ? 'error-red' : ''}`}>{error && <div>{error}</div>}</div>
         <div className="logbutton">
           <Button variant="primary" type="submit" className="btn btn-primary">
             Sign In
@@ -79,17 +71,18 @@ const LoginForm = () => {
         </div>
         <div className="create-account">
           Don't have an account?
-          <a href="/register" className='create-account123' onClick={handleCreateAccount}>
+          <a href="/register" className="create-account123" onClick={handleCreateAccount}>
             Create now
           </a>
         </div>
-        <div className="error">{error && <div>{error}</div>}</div>
+        
       </form>
     </div>
   );
 };
 
 export default LoginForm;
+
 
 
 //remember me and frogot password incase needed
