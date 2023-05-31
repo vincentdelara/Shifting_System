@@ -27,7 +27,7 @@ const ListShiftComponent = () => {
   const [dateError, setDateError] = useState('');
   const [selectedRowsData, setSelectedRowsData] = useState([]);
   const [deleteItemId, setDeleteItemId] = useState('');
-const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
 
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -78,7 +78,7 @@ const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   }
 
 
-  
+
 
   //clear filter button
   function clearFilters() {
@@ -123,20 +123,20 @@ const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
     setSelectedCheckboxes(updatedSelectedCheckboxes);
   }
 
-function deleteData(e, id) {
-  e.preventDefault();
-  setDeleteItemId(id); // Set the ID of the item to be deleted
-  setIsDeleteModalOpen(true); // Open the delete modal
-}
+  function deleteData(e, id) {
+    e.preventDefault();
+    setDeleteItemId(id); // Set the ID of the item to be deleted
+    setIsDeleteModalOpen(true); // Open the delete modal
+  }
 
-function confirmDelete() {
-  Shiftservice.deleteData(deleteItemId)
-    .then(() => {
-      getAllData();
-      setIsDeleteModalOpen(false); // Close the delete modal after deleting the item
-    })
-    .catch(e => console.log(e));
-}
+  function confirmDelete() {
+    Shiftservice.deleteData(deleteItemId)
+      .then(() => {
+        getAllData();
+        setIsDeleteModalOpen(false); // Close the delete modal after deleting the item
+      })
+      .catch(e => console.log(e));
+  }
 
 
 
@@ -342,56 +342,56 @@ function confirmDelete() {
                     )}
 
 
-<Tooltip
-                        title={
-                          data.status === 'Unused'
-                            ? "Update Shift"
-                            : data.status === 'Pending'
-                              ? "Update unavailable: Pending approval"
-                              : data.status === 'Approved'
-                                ? "Shift already used"
-                                : data.status === 'Expired'
-                                  ? "Expired"
-                                  : ""
-                        }
-                        followCursor
-                      >
-                        <Box>
-                    <Link
-                      to={`/add-shift/${data.id}`}
-                      className={`btn btn-info edit ${data.reqday !== null ? 'disabled' : ''}`} // Add the disabled class if reqday is not empty
-                      href=""
+                    <Tooltip
+                      title={
+                        data.status === 'Unused'
+                          ? "Update Shift"
+                          : data.status === 'Pending'
+                            ? "Update unavailable: Pending approval"
+                            : data.status === 'Approved'
+                              ? "Shift already used"
+                              : data.status === 'Expired'
+                                ? "Expired"
+                                : ""
+                      }
+                      followCursor
                     >
-                      Update
-                    </Link>
-                    </Box>
-                      </Tooltip>
+                      <Box>
+                        <Link
+                          to={`/add-shift/${data.id}`}
+                          className={`btn btn-info edit ${data.reqday !== null ? 'disabled' : ''}`} // Add the disabled class if reqday is not empty
+                          href=""
+                        >
+                          Update
+                        </Link>
+                      </Box>
+                    </Tooltip>
 
 
-                      <Tooltip
-                        title={
-                          data.status === 'Unused'
-                            ? "Delete Shift"
-                            : data.status === 'Pending'
-                              ? "Delete unavailable: Pending approval"
-                              : data.status === 'Approved'
-                                ? "Shift already used"
-                                : data.status === 'Expired'
-                                  ? "Expired"
-                                  : ""
-                        }
-                        followCursor
-                      >
-                        <Box>
-                    <a
-                      onClick={(e) => deleteData(e, data.id)}
-                      className={`btn btn-danger list ${data.reqday !== null ? 'disabled' : ''}`} // Add the disabled class if reqday is not empty
+                    <Tooltip
+                      title={
+                        data.status === 'Unused'
+                          ? "Delete Shift"
+                          : data.status === 'Pending'
+                            ? "Delete unavailable: Pending approval"
+                            : data.status === 'Approved'
+                              ? "Shift already used"
+                              : data.status === 'Expired'
+                                ? "Expired"
+                                : ""
+                      }
+                      followCursor
                     >
-                      <img src="./assets/deleteicn.svg" alt="Delete" className='icon' />
-                    </a>
+                      <Box>
+                        <a
+                          onClick={(e) => deleteData(e, data.id)}
+                          className={`btn btn-danger list ${data.reqday !== null ? 'disabled' : ''}`} // Add the disabled class if reqday is not empty
+                        >
+                          <img src="./assets/deleteicn.svg" alt="Delete" className='icon' />
+                        </a>
 
-                    </Box>
-                      </Tooltip>
+                      </Box>
+                    </Tooltip>
                   </div>
                 </td>
               </tr>
@@ -535,24 +535,24 @@ function confirmDelete() {
 
 
 
-{isDeleteModalOpen && (
-  <div className="modal" style={{ display: 'block' }}>
-    <div className="modal-dialog">
-      <div className="modal-content">
-        <div className="modal-header">
-          <h5 className="modal-title">Confirmation</h5>
-        </div>
-        <div className="modal-body">
-          Are you sure you want to delete this item?
-        </div>
-        <div className="modal-footer">
-          <button className="btn btn-secondary" onClick={() => setIsDeleteModalOpen(false)}>Cancel</button>
-          <button className="btn btn-danger" onClick={confirmDelete}>Delete</button>
-        </div>
-      </div>
-    </div>
-  </div>
-)}
+        {isDeleteModalOpen && (
+          <div className="modal" style={{ display: 'block' }}>
+            <div className="modal-dialog">
+              <div className="modal-content">
+                <div className="modal-header">
+                  <h5 className="modal-title">Confirmation</h5>
+                </div>
+                <div className="modal-body">
+                  Are you sure you want to delete this item?
+                </div>
+                <div className="modal-footer">
+                  <button className="btn btn-secondary" onClick={() => setIsDeleteModalOpen(false)}>Cancel</button>
+                  <button className="btn btn-danger" onClick={confirmDelete}>Delete</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
 
 
       </div>
