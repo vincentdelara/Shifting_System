@@ -10,8 +10,29 @@ const LoginForm = () => {
   const [error, setError] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
 
+  const [usernameError, setUsernameError] = useState(false);
+const [passwordError, setPasswordError] = useState(false);
+const [inva, setinvalid] = useState(false);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (
+      !username ||
+      !password 
+    ) {
+      setError('Please fill in all required fields');
+      setTimeout(() => setError(''), 5000);
+
+      setUsernameError(!username);
+      setPasswordError(!password);
+      
+      setTimeout(() => setUsernameError(''), 5000);
+      setTimeout(() => setPasswordError(''), 5000);
+
+      return;
+    }
+
 
     try {
       const response = await Userservice.getUserByUsername(username);
@@ -21,12 +42,12 @@ const LoginForm = () => {
         localStorage.setItem('loggedInUser', username); // Store username in local storage
         window.location.href = '/list';
       } else {
-        setError('Invalid username or password');
-        setTimeout(() => setError(''), 2500); // Reset error after 2.5 seconds
+        setinvalid('Invalid username or password');
+        setTimeout(() => setinvalid(''), 4000); // Reset error after 2.5 seconds
       }
     } catch (error) {
       setError('Please enter your credentials');
-      setTimeout(() => setError(''), 2500); // Reset error after 2.5 seconds
+      setTimeout(() => setError(''), 4000); // Reset error after 2.5 seconds
     }
   };
 
@@ -46,7 +67,7 @@ const LoginForm = () => {
             <Form.Control
               type="text"
               value={username}
-              className={`form-control login ${error ? 'is-invalid' : ''}`}
+              className={`form-control login ${usernameError ? 'is-invalid' : ''} ${inva ? 'is-invalid' : ''}`}
               placeholder='Username'
               onChange={(e) => setUsername(e.target.value)}
             />
@@ -57,13 +78,14 @@ const LoginForm = () => {
             <Form.Control
               type="password"
               value={password}
-              className={`form-control login ${error ? 'is-invalid' : ''}`}
+              className={`form-control login ${passwordError ? 'is-invalid' : ''} ${inva ? 'is-invalid' : ''}`}
               placeholder='Password'
               onChange={(e) => setPassword(e.target.value)}
             />
           </Form.Group>
         </div>
         <div className={`error ${error ? 'error-red' : ''}`}>{error && <div>{error}</div>}</div>
+        <div className={`error ${inva ? 'error-red' : ''}`}>{inva && <div>{inva}</div>}</div>
         <div className="logbutton">
           <Button variant="primary" type="submit" className="btn btn-primary">
             Sign In

@@ -1,4 +1,4 @@
-//vincentdelara
+
 package tgsi.shiftingsystem.model;
 
 public class User {

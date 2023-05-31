@@ -1,4 +1,4 @@
-//vincentdelara
+
 package tgsi.shiftingsystem.mapper;
 import org.apache.ibatis.annotations.*;
 

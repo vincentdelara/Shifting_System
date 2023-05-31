@@ -1,3 +1,4 @@
+//vincent de lara
 import React from "react";
 import "../BackgroundComponent.css"; 
 
