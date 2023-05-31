@@ -9,6 +9,7 @@ import "../modal2request.css";
 import { Form } from 'react-bootstrap';
 import Box from '@mui/material/Box';
 import Tooltip from '@mui/material/Tooltip';
+import AddShiftComponent from './AddShiftComponent';
 
 
 
@@ -33,6 +34,7 @@ const ListShiftComponent = () => {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isModalOpen2, setIsModalOpen2] = useState(false);
+  const [isModalOpen3, setIsModalOpen3] = useState(false);
 
   const loggedInUser = localStorage.getItem('loggedInUser');
 
@@ -170,7 +172,13 @@ const ListShiftComponent = () => {
   }
 
 
-
+  const handleModalClose3 = () => {
+    setIsModalOpen3(false);
+  };
+  
+  const handleModalOpen3 = () => {
+    setIsModalOpen3(true);
+  };
 
 
 
@@ -218,6 +226,10 @@ const ListShiftComponent = () => {
         <Link to={"/add-shift"} className='btn btn-primary mb-2 mt-3 add' id='addbttn'>
           <label className="button-text">Add Shift</label>
         </Link>
+        <button className="btn btn-primary mb-2 mt-3 add" onClick={handleModalOpen3}>
+      <label className="button-text">New Modal Button</label>
+    </button>
+
       </div>
       <div className='table01'>
         <table className='table table-bordered table striped table table-hover' >
@@ -555,7 +567,15 @@ const ListShiftComponent = () => {
           </div>
         )}
 
-
+{isModalOpen3 && (
+      <div className="modal" style={{ display: 'block' }}>
+       
+            <div className="modal-body">
+              <AddShiftComponent />
+            </div>
+       
+      </div>
+    )}
       </div>
     </div>
   );
