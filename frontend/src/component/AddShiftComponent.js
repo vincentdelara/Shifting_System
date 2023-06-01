@@ -9,7 +9,7 @@ import 'rc-time-picker/assets/index.css';
 import moment from 'moment';
 
 
-const AddShiftComponent = () => {
+const AddShiftComponent = ({handleModalClose3 }) => {
     const [overtime, setovertime] = useState(new Date());
     const [otime, setotime] = useState(new Date());
     const [start, setstart] = useState(null);
@@ -51,6 +51,9 @@ const AddShiftComponent = () => {
     };
 
 
+    const handleCancel = () => {
+        handleModalClose3(); // Call the function to close modal3
+      };
 
 
     function saveData(e) {
@@ -116,6 +119,7 @@ const AddShiftComponent = () => {
                 Shiftservice.saveData(shiftData)
                     .then(navigate("/shifts"))
                     .catch((e) => console.log(e));
+                    handleModalClose3();
             }
         } else {
             setformError("Please, fill in all inputs");
@@ -158,7 +162,7 @@ const AddShiftComponent = () => {
 
     return (
         <div>
-            <div className='container mt-5'>
+            <div className='container mt-5 add'>
                 <div className='row'>
                     <div className='card col-md-6 offset-md-3'>
                         <nav className='navbar navbar-expand-md loob'>
@@ -234,7 +238,7 @@ const AddShiftComponent = () => {
                                 {timeError && <div className="text-danger">{timeError}</div>}
                                 <div className='submitcancel'>
 
-                                    <Link to='/shifts' className='btn btn-danger ml-2'>Cancel</Link>
+                                    <Link to='/shifts' className='btn btn-danger ml-2' onClick={handleCancel}>Cancel</Link>
                                     <button className='btn btn-success' onClick={saveData}>Submit</button>
                                 </div>
                             </form>

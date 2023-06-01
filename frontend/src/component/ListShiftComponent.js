@@ -5,6 +5,7 @@ import Shiftservice from '../service/Shiftservice';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import "../ListShiftComponent.css";
+import "../AddshiftModal.css";
 import "../modal2request.css";
 import { Form } from 'react-bootstrap';
 import Box from '@mui/material/Box';
@@ -35,6 +36,7 @@ const ListShiftComponent = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isModalOpen2, setIsModalOpen2] = useState(false);
   const [isModalOpen3, setIsModalOpen3] = useState(false);
+  
 
   const loggedInUser = localStorage.getItem('loggedInUser');
 
@@ -223,11 +225,10 @@ const ListShiftComponent = () => {
           <label className="filtext">Filters</label>
           <img src="./assets/filter.png" alt="Filter" className='filter-icon' />
         </button>
-        <Link to={"/add-shift"} className='btn btn-primary mb-2 mt-3 add' id='addbttn'>
-          <label className="button-text">Add Shift</label>
-        </Link>
+        
+        
         <button className="btn btn-primary mb-2 mt-3 add" onClick={handleModalOpen3}>
-      <label className="button-text">New Modal Button</label>
+      <label className="button-text addshift">Add Shift</label>
     </button>
 
       </div>
@@ -348,7 +349,7 @@ const ListShiftComponent = () => {
                               selectedCheckboxes.filter((checkbox) => checkbox).length !== 2
                             }
                           >
-                            Add req day
+                            REQUEST 2222
                           </button>
                         </Box>
                       </Tooltip>
@@ -570,8 +571,8 @@ const ListShiftComponent = () => {
 {isModalOpen3 && (
       <div className="modal" style={{ display: 'block' }}>
        
-            <div className="modal-body">
-              <AddShiftComponent />
+            <div className="modal-body add">
+            <AddShiftComponent handleModalClose3={handleModalClose3} />
             </div>
        
       </div>
@@ -582,3 +583,9 @@ const ListShiftComponent = () => {
 };
 
 export default ListShiftComponent;
+
+
+
+/**Line: 228     <Link to={"/add-shift"} className='btn btn-primary mb-2 mt-3 add' id='addbttn'>
+          <label className="button-text">Add Shift</label>
+        </Link> */
