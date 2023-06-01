@@ -260,3 +260,33 @@
  width: 150px;
 }
 
+.modal-dialog.delete{
+  width: 300px;
+}
+
+.warning{
+  text-align: center;
+  margin-top: 5%;
+}
+
+.candel{
+  display: flex;
+  justify-content: center; 
+  padding-top: 2.5%;
+  padding-bottom: 2.5%;
+  padding-right: 2.5%;
+  
+}
+
+.confirmwarning {
+  color: #1d0505;
+}
+
+.delmodal{
+  margin-left: 1.5%;
+}
+
+.canmodal{
+  margin-right: 1.5%;
+  margin-left: 1.5%;
+}

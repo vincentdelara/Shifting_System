@@ -11,6 +11,7 @@ import { Form } from 'react-bootstrap';
 import Box from '@mui/material/Box';
 import Tooltip from '@mui/material/Tooltip';
 import AddShiftComponent from './AddShiftComponent';
+import { FaExclamationTriangle } from 'react-icons/fa';
 
 
 
@@ -349,7 +350,7 @@ const ListShiftComponent = () => {
                               selectedCheckboxes.filter((checkbox) => checkbox).length !== 2
                             }
                           >
-                            REQUEST 2222
+                            Request
                           </button>
                         </Box>
                       </Tooltip>
@@ -549,24 +550,34 @@ const ListShiftComponent = () => {
 
 
 
-        {isDeleteModalOpen && (
-          <div className="modal" style={{ display: 'block' }}>
-            <div className="modal-dialog">
-              <div className="modal-content">
-                <div className="modal-header">
-                  <h5 className="modal-title">Confirmation</h5>
-                </div>
-                <div className="modal-body">
-                  Are you sure you want to delete this item?
-                </div>
-                <div className="modal-footer">
-                  <button className="btn btn-secondary" onClick={() => setIsDeleteModalOpen(false)}>Cancel</button>
-                  <button className="btn btn-danger" onClick={confirmDelete}>Delete</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
+{isDeleteModalOpen && (
+  <div className="modal" style={{ display: 'block' }}>
+    <div className="modal-dialog delete">
+      <div className="modal-content">
+        <div className="modal-header">
+          <h5 className="modal-title confirmwarning ">
+            <FaExclamationTriangle style={{ marginRight: '0.5rem' }} className='confirmwarning'/>
+            Confirmation
+          </h5>
+        </div>
+        <div className="modal-body">
+          <p className='warning'>
+            <strong >Warning: </strong> Are you absolutely certain you wish to delete this item?
+          </p>
+          
+        </div>
+        <div className="candel">
+          <button className="btn btn-secondary canmodal" onClick={() => setIsDeleteModalOpen(false)}>
+            Cancel
+          </button>
+          <button className="btn btn-danger delmodal" onClick={confirmDelete}>
+            <strong>Delete</strong>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+)}
 
 {isModalOpen3 && (
       <div className="modal" style={{ display: 'block' }}>
