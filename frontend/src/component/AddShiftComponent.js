@@ -81,6 +81,7 @@ const AddShiftComponent = ({handleModalClose3 }) => {
             // Set shifttype based on shift duration
             if (shiftDuration < 4) {
                 settimeError("Shift hours must be at least 4 hours!");
+                setTimeout(() => settimeError(''), 2000);
                 return;
             } else if (shiftDuration < 8) {
                 shiftData.shifttype = "4 Hours Shifting";
@@ -123,6 +124,7 @@ const AddShiftComponent = ({handleModalClose3 }) => {
             }
         } else {
             setformError("Please, fill in all inputs");
+            setTimeout(() => setformError(''), 2000);
         }
     }
 

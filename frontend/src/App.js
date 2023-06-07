@@ -9,6 +9,7 @@ import RequestComponent from "./component/RequestComponent";
 import LoginForm from "./component/LoginForm";
 import RegistrationForm from "./component/RegistrationForm";
 import BackgroundComponent from "./component/BackgroundComponent";
+import ApproverComponent from './component/ApproverComponent';
 
 function App() {
   // Check if user is logged in by looking for a stored value in local storage
@@ -50,6 +51,10 @@ function App() {
         <Route
           path="/request/:id"
           element={<RestrictedRoute element={<RequestComponent />} />}
+        />
+         <Route
+          path="/approver"
+          element={<RestrictedRoute element={<ApproverComponent />} />}
         />
         <Route
           path="/"

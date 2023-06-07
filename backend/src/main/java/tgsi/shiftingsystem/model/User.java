@@ -11,7 +11,14 @@ public class User {
     private String password;
     private String business_unit;
     private String position;
+    private String role;
     
+    public String getRole() {
+        return role;
+    }
+    public void setRole(String role) {
+        this.role = role;
+    }
     public Long getUserId() {
         return userId;
     }

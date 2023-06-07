@@ -583,7 +583,9 @@ const ListShiftComponent = () => {
       <div className="modal" style={{ display: 'block' }}>
        
             <div className="modal-body add">
-            <AddShiftComponent handleModalClose3={handleModalClose3} />
+              <div className ='modaladdshift'>
+            <AddShiftComponent  handleModalClose3={handleModalClose3} />
+            </div>
             </div>
        
       </div>

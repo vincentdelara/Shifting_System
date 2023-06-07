@@ -40,7 +40,11 @@ const [inva, setinvalid] = useState(false);
         // Login successful
         setError('');
         localStorage.setItem('loggedInUser', username); // Store username in local storage
-        window.location.href = '/list';
+        if (response.data.role === 'Approver') {
+          window.location.href ='/approver';
+        } else {
+          window.location.href ='/list';
+        }
       } else {
         setinvalid('Invalid username or password');
         setTimeout(() => setinvalid(''), 4000); // Reset error after 2.5 seconds
@@ -50,7 +54,6 @@ const [inva, setinvalid] = useState(false);
       setTimeout(() => setError(''), 4000); // Reset error after 2.5 seconds
     }
   };
-
   const handleCreateAccount = () => {
     window.location.href = '/register';
   };
