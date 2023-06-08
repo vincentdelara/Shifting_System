@@ -8,8 +8,10 @@ import { format } from 'date-fns';
 const ApproverComponent = () => {
   const [pendingUsers, setPendingUsers] = useState([]);
   const [isModalOpenview, setIsModalOpenview] = useState(false);
+  const [selectedPartnerId, setSelectedPartnerId] = useState(null);
   const [selectedRowsData, setSelectedRowsData] = useState([]);
-  
+  const [View1RowData, setView1RowData] = useState([]);
+
   useEffect(() => {
     fetchData();
   }, []);
@@ -42,16 +44,37 @@ const ApproverComponent = () => {
     setIsModalOpenview(false);
   };
 
-  const handleModalOpenview = (selectedRows) => {
+
+  const handleModalOpenview1 = (userId) => {
+    setSelectedPartnerId(userId);
     setIsModalOpenview(true);
-    setSelectedRowsData(selectedRows);
+    // Set the selectedRowsData based on the userId
+    if (userId !== null) {
+      const rowData = pendingUsers.find((user) => user.id === userId);
+      setSelectedRowsData(rowData ? [rowData] : []);
+    } else {
+      setSelectedRowsData([]);
+    }
+  };
+
+
+
+  const handleModalOpenview = (partnerId) => {
+    setSelectedPartnerId(partnerId);
+    setIsModalOpenview(true);
+    // Set the selectedRowsData based on the partnerId
+    if (partnerId !== null) {
+      const rowsData = pendingUsers.filter((user) => user.partnerId === partnerId);
+      setSelectedRowsData(rowsData);
+    } else {
+      setSelectedRowsData([]);
+    }
   };
 
   const formatDate = (date) => {
     return format(new Date(date), 'MMMM dd, yyyy');
   };
 
-  
   function formatTime(time) {
     const formattedTime = new Date(`2000-01-01T${time}`).toLocaleTimeString('en-US', {
       hour: 'numeric',
@@ -60,10 +83,6 @@ const ApproverComponent = () => {
     });
     return formattedTime;
   }
-
-  const addLeaveDate = () => {
-    // Implement your logic for adding leave date here
-  };
 
   return (
     <div className='container'>
@@ -83,20 +102,38 @@ const ApproverComponent = () => {
               <tr className='laman' key={user.id}>
                 <td>{user.firstName} {user.lastName} ({user.username})</td>
                 <td>{format(new Date(user.reqday), 'MMMM dd, yyyy')}</td>
-                <td>
-                  <button
-                    className='btn btn-info'
-                    onClick={() => handleModalOpenview([user])}
-                  >
-                    View
-                  </button>
-                </td>
-                <td></td>
+                {user.partnerId !== null ? (
+                  <>
+                    <td>
+                      <button
+                        className='btn btn-info'
+                        onClick={() => handleModalOpenview(user.partnerId)}
+                      >
+                        View
+                      </button>
+                    </td>
+                    <td></td>
+                  </>
+                ) : (
+                  <>
+                    <td><button
+                      className='btn btn-info'
+                      onClick={() => handleModalOpenview1(user.id)} // Update this line
+                    >
+                      View
+                    </button>
+                    </td>
+                    <td></td>
+                  </>
+                )}
               </tr>
             ))}
           </tbody>
         </table>
       </div>
+
+
+
       {isModalOpenview && (
         <div className="modal req" style={{ display: 'block' }}>
           <div className="modal-dialog2">
@@ -107,31 +144,37 @@ const ApproverComponent = () => {
               <div className="modal-body2">
                 <div className="d-flex justify-content-center">
                   <div className="row">
-                    {selectedRowsData.map((row, index) => (
-                      <div className="col" key={index}>
-                        <td className="selected">
-                          <p>
-                            <strong>Render Time:</strong> {row.overtime !== row.otime ? `${formatDate(row.overtime)} to ${formatDate(row.otime)}` : formatDate(row.overtime)}
-                          </p>
-                          <p><strong>Start Time:</strong> {formatTime(row.start)}</p>
-                          <p><strong>End Time:</strong> {formatTime(row.end)}</p>
-                          <p><strong>Expiration Date:</strong> {formatDate(row.xpire)}</p>
-                          <p><strong>Shift Type:</strong> {row.shifttype}</p>
-                          <p><strong>Project:</strong> {row.proj}</p>
-                          <p><strong>Remarks:</strong> {row.remarks}</p>
-                          <p><strong>Request Date</strong> {format(new Date(row.reqday), 'MMMM dd, yyyy')}</p>
-                        </td>
-                      </div>
-                    ))}
+                    <div className="modal-body2">
+                      {selectedPartnerId !== null ? (
+                        <div>
+                          <h5>Shift Info {selectedPartnerId}</h5>
+                          {/* Fetch and display shift info for the selected partnerId */}
+                          {selectedRowsData.map((rowData) => (
+                            <div key={rowData.id}>
+                              <p>
+                                <strong>Render Time:</strong> {rowData.overtime !== rowData.otime ? `${formatDate(rowData.overtime)} to ${formatDate(rowData.otime)}` : formatDate(rowData.overtime)}
+                              </p>
+                              <p><strong>Start Time:</strong> {formatTime(rowData.start)}</p>
+                              <p><strong>End Time:</strong> {formatTime(rowData.end)}</p>
+                              <p><strong>Expiration Date:</strong> {formatDate(rowData.xpire)}</p>
+                              <p><strong>Shift Type:</strong> {rowData.shifttype}</p>
+                              <p><strong>Project:</strong> {rowData.proj}</p>
+                              <p><strong>Remarks:</strong> {rowData.remarks}</p>
+                              <p><strong>Request Date Usage:</strong> {formatDate(rowData.reqday)}</p>
+                            </div>
+                          ))}
+                        </div>
+                      ) : null}
+                    </div>
                   </div>
                 </div>
               </div>
               <div className="subcel">
-                <button className='btn btn-info cancel' onClick={handleModalCloseview}>
-                  Cancel
-                </button>
-                <button className="btn btn-info submit" onClick={addLeaveDate}>
-                  Submit
+                <button className="btn btn-info submit" onClick={() => {
+                  setSelectedPartnerId(null);
+                  handleModalCloseview();
+                }}>
+                  Done
                 </button>
               </div>
             </div>
