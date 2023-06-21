@@ -15,11 +15,11 @@ public interface DataMapper {
         @Select("SELECT * FROM datas WHERE id = #{id}")
         Data findById(Long id);
     
-        @Insert("INSERT INTO datas(overtime, otime, start, end, xpire, shifttype, status, proj, remarks, reqday, username, partnerId) VALUES(#{overtime}, #{otime}, #{start}, #{end}, #{xpire}, #{shifttype}, #{status}, #{proj}, #{remarks}, #{reqday}, #{username}, #{partnerId})")
+        @Insert("INSERT INTO datas(overtime, otime, start, end, xpire, shifttype, status, proj, remarks, reqday, username, partnerId, approvername) VALUES(#{overtime}, #{otime}, #{start}, #{end}, #{xpire}, #{shifttype}, #{status}, #{proj}, #{remarks}, #{reqday}, #{username}, #{partnerId}, #{approvername})")
         @Options(useGeneratedKeys = true, keyProperty = "id")
         void insert(Data data);
     
-        @Update("UPDATE datas SET overtime = #{overtime}, otime = #{otime}, start = #{start}, end = #{end}, xpire = #{xpire}, shifttype = #{shifttype}, status = #{status} , proj = #{proj}, remarks = #{remarks}, reqday = #{reqday}, partnerId = #{partnerId} WHERE id = #{id}")
+        @Update("UPDATE datas SET overtime = #{overtime}, otime = #{otime}, start = #{start}, end = #{end}, xpire = #{xpire}, shifttype = #{shifttype}, status = #{status} , proj = #{proj}, remarks = #{remarks}, reqday = #{reqday}, partnerId = #{partnerId}, approvername = #{approvername} WHERE id = #{id}")
         void update(Data data);
     
         

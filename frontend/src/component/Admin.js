@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import Shiftservice from '../service/Shiftservice';
 import UserService from '../service/Userservice';
-import "../ApproverComponent.css";
+import "../Admin.css";
 import { format } from 'date-fns';
+import ExcelJS from 'exceljs';
 
-const ApproverComponent = () => {
+const Admin = () => {
   const [pendingUsers, setPendingUsers] = useState([]);
   const [isModalOpenview, setIsModalOpenview] = useState(false);
   const [selectedPartnerId, setSelectedPartnerId] = useState(null);
@@ -18,11 +19,10 @@ const ApproverComponent = () => {
     try {
       const response = await Shiftservice.getAllData();
       const data = response.data;
-      const usersWithPartnerId = data.filter((item) => item.partnerId !== null);
 
       // Retrieve first name and last name for each user
       const usersWithNames = await Promise.all(
-        usersWithPartnerId.map(async (user) => {
+        data.map(async (user) => {
           const userDataResponse = await UserService.getUserByUsername(user.username);
           const userData = userDataResponse.data;
           const firstName = userData.firstname;
@@ -79,120 +79,136 @@ const ApproverComponent = () => {
     return formattedTime;
   }
 
-  const handleApprove = async (userId) => {
-    try {
-      // Find the user with the matching userId
-      const user = pendingUsers.find((user) => user.id === userId);
-      if (!user) return;
-  
-      // Retrieve the partnerId of the selected user
-      const partnerId = user.partnerId;
-  
-      // Find all rows with the same partnerId and update their status and approvername
-      const partnerRows = pendingUsers.filter((user) => user.partnerId === partnerId);
-      await Promise.all(
-        partnerRows.map(async (row) => {
-          const updatedData = {
-            ...row,
-            status: "Approved",
-            approvername: localStorage.getItem("loggedInUser") // Set approvername as the username from local storage
-          };
-          await Shiftservice.updateData(row.id, updatedData);
-        })
-      );
-  
-      // Refresh the data to reflect the updated status
-      fetchData();
-    } catch (error) {
-      console.error('Error:', error);
+  function formatTimeRange(overtime, otime) {
+    if (overtime === otime) {
+      return formatDate(overtime);
+    } else {
+      return formatDate(overtime) + " to " + formatDate(otime);
     }
+  }
+
+  const handlePrintExcel = () => {
+    const workbook = new ExcelJS.Workbook();
+    const worksheet = workbook.addWorksheet('Pending Leave Requests');
+
+    // Add table headers
+    worksheet.addRow([
+      'Name (username)',
+      'Render Time',
+      'From',
+      'To',
+      'Expiration Date',
+      'Request Leave Date',
+      'Shift Type',
+      'Status',
+      'Approver Name'
+    ]);
+
+    // Add table data
+    pendingUsers.forEach((user) => {
+      worksheet.addRow([
+        `${user.firstName} ${user.lastName} (${user.username})`,
+        formatTimeRange(user.overtime, user.otime),
+        new Date(`2000-01-01T${user.start}`).toLocaleTimeString('en-US', {
+          hour: 'numeric',
+          minute: 'numeric',
+          hour12: true
+        }),
+        new Date(`2000-01-01T${user.end}`).toLocaleTimeString('en-US', {
+          hour: 'numeric',
+          minute: 'numeric',
+          hour12: true
+        }),
+        new Date(user.xpire).toLocaleDateString('en-US', {
+          month: 'long',
+          day: '2-digit',
+          year: 'numeric'
+        }),
+        format(new Date(user.reqday), 'MMMM dd, yyyy'),
+        user.shifttype,
+        user.status,
+        user.approvername
+      ]);
+    });
+
+    // Generate the Excel file
+    workbook.xlsx.writeBuffer().then((buffer) => {
+      const blob = new Blob([buffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'pending_leave_requests.xlsx';
+      a.click();
+      URL.revokeObjectURL(url);
+    });
   };
-  
-  const handleDisapprove = async (userId) => {
-    try {
-      // Find the user with the matching userId
-      const user = pendingUsers.find((user) => user.id === userId);
-      if (!user) return;
-  
-      // Retrieve the partnerId of the selected user
-      const partnerId = user.partnerId;
-  
-      // Find all rows with the same partnerId and update their status and approvername
-      const partnerRows = pendingUsers.filter((user) => user.partnerId === partnerId);
-      await Promise.all(
-        partnerRows.map(async (row) => {
-          const updatedData = {
-            ...row,
-            status: "Disapproved",
-            approvername: localStorage.getItem("loggedInUser") // Set approvername as the username from local storage
-          };
-          await Shiftservice.updateData(row.id, updatedData);
-        })
-      );
-  
-      // Refresh the data to reflect the updated status
-      fetchData();
-    } catch (error) {
-      console.error('Error:', error);
-    }
-  };
-  
-  
+
   return (
-    <div className='container'>
-      <h2 className='tit'>Requests Leave </h2>
+    <div className='container admin'>
+        <div className='printer'>
+        <button className="btn btn-primary print" onClick={handlePrintExcel}>
+        Print
+      </button>
+      </div>
       <div className='table01'>
         <table className='table table-bordered table striped table table-hover haha'>
           <thead className='rowcolor'>
             <tr>
-              <th>Name</th>
+              <th>Name (username)</th>
+              <th className='gilid'>Render Time</th>
+              <th>From</th>
+              <th>To</th>
+              <th>Expiration Date</th>
               <th>Request Leave Date</th>
+              <th>Shift Type</th>
               <th>Status</th>
-              <th>View</th>
-              <th>Action</th>
+              <th>Approver Name</th>
             </tr>
           </thead>
           <tbody>
-            {pendingUsers.reduce((uniqueUsers, user) => {
-              if (!uniqueUsers.find((u) => u.partnerId === user.partnerId)) {
-                uniqueUsers.push(user);
-              }
-              return uniqueUsers;
-            }, []).map((user) => (
-              <tr className='laman' key={user.id}>
-                <td>{user.firstName} {user.lastName} ({user.username})</td>
-                <td>{format(new Date(user.reqday), 'MMMM dd, yyyy')}</td>
-                <td>{user.status}</td>
-                <td>
-                  <button
-                    className='btn btn-info'
-                    onClick={() => handleModalOpenview(user.partnerId)}
-                  >
-                    View
-                  </button>
-                </td>
-                <td>
-                  <button
-                    className='btn btn-success'
-                    onClick={() => handleApprove(user.id)}
-                  >
-                    Approved
-                  </button>
+  {pendingUsers.map((user) => (
+    <tr className='laman' key={user.id}>
+      <td>{user.firstName} {user.lastName} ({user.username})</td>
+      <td className='gilid'>{formatTimeRange(user.overtime, user.otime)}</td>
+      <td>{new Date(`2000-01-01T${user.start}`).toLocaleTimeString('en-US', {
+        hour: 'numeric',
+        minute: 'numeric',
+        hour12: true
+      })}</td>
+      <td>{new Date(`2000-01-01T${user.end}`).toLocaleTimeString('en-US', {
+        hour: 'numeric',
+        minute: 'numeric',
+        hour12: true
+      })}</td>
+      <td>{new Date(user.xpire).toLocaleDateString('en-US', {
+        month: 'long',
+        day: '2-digit',
+        year: 'numeric'
+      })}</td>
+      <td>{format(new Date(user.reqday), 'MMMM dd, yyyy')}</td>
+      <td>{user.shifttype}</td>
+      <td>
+        {user.status === "Unused" && (
+          <span className="badge bg-success rounded-pill">Unused</span>
+        )}
+        {user.status === "Pending" && (
+          <span className="badge bg-warning rounded-pill">Pending</span>
+        )}
+        {user.status === "Approved" && (
+          <span className="badge custom-bg rounded-pill">Approved</span>
+        )}
+        {user.status === "Expired" && (
+          <span className="badge bg-danger rounded-pill">Expired</span>
+        )}
+      </td>
+      <td><td>{user.approvername}</td></td>
+    </tr>
+  ))}
+</tbody>
 
-                  <button
-                    className='btn btn-danger dis'
-                    onClick={() => handleDisapprove(user.id)}
-                  >
-                    Disapproved
-                  </button>
-                </td>
-          
-              </tr>
-            ))}
-          </tbody>
         </table>
       </div>
-
+      
       {isModalOpenview && (
         <div className="modal req" style={{ display: 'block' }}>
           <div className="modal-dialog2">
@@ -262,4 +278,4 @@ const ApproverComponent = () => {
   );
 };
 
-export default ApproverComponent;
+export default Admin;

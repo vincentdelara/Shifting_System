@@ -51,12 +51,18 @@ width: 600px;
   padding-left: 0;
 }
 
-.btn.btn-danger.dis{
-  border-radius: 25px;
-  margin-left: 2%;
+
+.container.admin{
+    margin-top: 3%;
 }
 
-.tit{
-  font-weight: bold;
-  margin-top: 3%;
+.btn.btn-primary.print{
+    margin-bottom: 1%;
+    width: 15%;
+    font-weight: bolder;
+}
+
+.printer{
+    display: flex;
+    justify-content: end; 
 }

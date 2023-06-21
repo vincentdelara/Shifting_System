@@ -14,46 +14,46 @@ const LoginForm = () => {
 const [passwordError, setPasswordError] = useState(false);
 const [inva, setinvalid] = useState(false);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+const handleSubmit = async (e) => {
+  e.preventDefault();
 
-    if (
-      !username ||
-      !password 
-    ) {
-      setError('Please fill in all required fields');
-      setTimeout(() => setError(''), 5000);
+  if (!username || !password) {
+    setError('Please fill in all required fields');
+    setTimeout(() => setError(''), 5000);
 
-      setUsernameError(!username);
-      setPasswordError(!password);
-      
-      setTimeout(() => setUsernameError(''), 5000);
-      setTimeout(() => setPasswordError(''), 5000);
+    setUsernameError(!username);
+    setPasswordError(!password);
 
-      return;
-    }
+    setTimeout(() => setUsernameError(''), 5000);
+    setTimeout(() => setPasswordError(''), 5000);
 
+    return;
+  }
 
-    try {
-      const response = await Userservice.getUserByUsername(username);
-      if (response.data.password === password) {
-        // Login successful
-        setError('');
-        localStorage.setItem('loggedInUser', username); // Store username in local storage
-        if (response.data.role === 'Approver') {
-          window.location.href ='/approver';
-        } else {
-          window.location.href ='/list';
-        }
+  try {
+    const response = await Userservice.getUserByUsername(username);
+    if (response.data.password === password) {
+      // Login successful
+      setError('');
+      localStorage.setItem('loggedInUser', username); // Store username in local storage
+      localStorage.setItem('userRole', response.data.role); // Store user role in local storage
+      if (response.data.role === 'Admin') {
+        window.location.href = '/admin';
+      } else if (response.data.role === 'Approver') {
+        window.location.href = '/approver';
       } else {
-        setinvalid('Invalid username or password');
-        setTimeout(() => setinvalid(''), 4000); // Reset error after 2.5 seconds
+        window.location.href = '/list';
       }
-    } catch (error) {
-      setError('Please enter your credentials');
-      setTimeout(() => setError(''), 4000); // Reset error after 2.5 seconds
+    } else {
+      setinvalid('Invalid username or password');
+      setTimeout(() => setinvalid(''), 4000); // Reset error after 4 seconds
     }
-  };
+  } catch (error) {
+    setError('Please enter your credentials');
+    setTimeout(() => setError(''), 4000); // Reset error after 4 seconds
+  }
+};
+
   const handleCreateAccount = () => {
     window.location.href = '/register';
   };

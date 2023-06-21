@@ -23,5 +23,7 @@ class Shiftservice {
     deleteData(id) {
         return axios.delete(BASE_URL + "/" + id);
     }
+
+    
 }
 export default new Shiftservice();

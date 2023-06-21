@@ -287,6 +287,9 @@ const ListShiftComponent = () => {
                   {data.status === "Approved" && (
                     <span className="badge custom-bg rounded-pill">Approved</span>
                   )}
+                  {data.status === "Disapproved" && (
+                    <span className="badge bg-danger rounded-pill">Expired</span>
+                  )}
                   {data.status === "Expired" && (
                     <span className="badge bg-danger rounded-pill">Expired</span>
                   )}

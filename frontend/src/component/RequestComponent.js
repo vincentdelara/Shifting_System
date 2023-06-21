@@ -24,22 +24,24 @@ const RequestComponent = () => {
     }, [id]);
 
     function saveData(e) {
-        e.preventDefault();
-    
-        if (reqdate !== '') {
-            const updatedShiftData = {
-                ...data,
-                reqday: reqdate,
-                status: 'Pending' // Add status field with the value "Pending"
-            };
-    
-            Shiftservice.updateData(id, updatedShiftData)
-                .then(() => navigate("/shifts"))
-                .catch((e) => console.log(e));
-        } else {
-            setDateError("Please select a date");
-        }
+    e.preventDefault();
+
+    if (reqdate !== '') {
+        const updatedShiftData = {
+            ...data,
+            reqday: reqdate,
+            status: 'Pending', // Add status field with the value "Pending"
+            partnerId: data.id // Automatically set partnerId with their id
+        };
+
+        Shiftservice.updateData(id, updatedShiftData)
+            .then(() => navigate("/shifts"))
+            .catch((e) => console.log(e));
+    } else {
+        setDateError("Please select a date");
     }
+}
+
     
 
     function formatDate(date) {

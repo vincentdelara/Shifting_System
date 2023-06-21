@@ -12,6 +12,7 @@
     "axios": "^1.4.0",
     "bootstrap": "^5.2.3",
     "cra-template": "1.2.0",
+    "exceljs": "^4.3.0",
     "formik": "^2.2.9",
     "jquery": "^3.7.0",
     "rc-time-picker": "^3.7.3",

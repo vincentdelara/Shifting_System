@@ -20,8 +20,15 @@ public class Data {
     private Date reqday;
     private String username;
     private String partnerId;
+    private String approvername;
 
     
+    public String getApprovername() {
+        return approvername;
+    }
+    public void setApprovername(String approvername) {
+        this.approvername = approvername;
+    }
     public String getPartnerId() {
         return partnerId;
     }
